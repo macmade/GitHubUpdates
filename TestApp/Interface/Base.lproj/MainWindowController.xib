@@ -61,9 +61,22 @@ DQ
                                     </binding>
                                 </connections>
                             </button>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="8nU-jn-7VV">
+                                <rect key="frame" x="227" y="23" width="16" height="16"/>
+                                <connections>
+                                    <binding destination="1aa-dJ-oYf" name="animate" keyPath="checkingForUpdates" id="BhN-Z9-YDY"/>
+                                    <binding destination="1aa-dJ-oYf" name="hidden" keyPath="checkingForUpdates" id="3Vn-qQ-Mmp">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="8nU-jn-7VV" firstAttribute="leading" secondItem="ryO-41-8Nu" secondAttribute="trailing" constant="8" id="6of-CU-zmh"/>
                             <constraint firstItem="ryO-41-8Nu" firstAttribute="centerX" secondItem="UX7-hq-iEx" secondAttribute="centerX" id="79R-gJ-qEe"/>
+                            <constraint firstItem="8nU-jn-7VV" firstAttribute="centerY" secondItem="ryO-41-8Nu" secondAttribute="centerY" id="VVI-Mo-ObX"/>
                             <constraint firstItem="UX7-hq-iEx" firstAttribute="top" secondItem="53i-cZ-M4x" secondAttribute="top" constant="40" id="bT6-KF-zb7"/>
                             <constraint firstAttribute="bottom" secondItem="ryO-41-8Nu" secondAttribute="bottom" constant="20" id="eFl-UM-0Vv"/>
                             <constraint firstAttribute="trailing" secondItem="UX7-hq-iEx" secondAttribute="trailing" constant="20" id="gnp-Jx-OOn"/>
