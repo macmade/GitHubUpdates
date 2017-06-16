@@ -19,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0555EBAE1EF3E34A0016167F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05FC9E371EF3B79900B252E7 /* GitHubUpdates.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0555EBA01EF3DDA10016167F;
+			remoteInfo = Relauncher;
+		};
 		05FC9E3B1EF3B79900B252E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 05FC9E371EF3B79900B252E7 /* GitHubUpdates.xcodeproj */;
@@ -50,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		052C708A1EF37044000B8D06 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
+		0555EBAC1EF3E3490016167F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		05ED06531EF33BCF00C61AFA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		05F82B351EF32ED000EC8A93 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F82B421EF32ED000EC8A93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +95,7 @@
 		05F82B1B1EF32EA700EC8A93 = {
 			isa = PBXGroup;
 			children = (
+				0555EBAC1EF3E3490016167F /* README.md */,
 				05FC9E371EF3B79900B252E7 /* GitHubUpdates.xcodeproj */,
 				05F82B361EF32ED000EC8A93 /* TestApp */,
 				05F82B261EF32EA700EC8A93 /* Products */,
@@ -146,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				05FC9E3C1EF3B79900B252E7 /* GitHubUpdates.framework */,
+				0555EBAF1EF3E34A0016167F /* Relauncher */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,6 +228,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		0555EBAF1EF3E34A0016167F /* Relauncher */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Relauncher;
+			remoteRef = 0555EBAE1EF3E34A0016167F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		05FC9E3C1EF3B79900B252E7 /* GitHubUpdates.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

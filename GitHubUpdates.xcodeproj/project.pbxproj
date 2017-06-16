@@ -74,6 +74,7 @@
 		0555EB991EF3D3810016167F /* NSBundle+GitHubUpdates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+GitHubUpdates.m"; sourceTree = "<group>"; };
 		0555EBA01EF3DDA10016167F /* Relauncher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Relauncher; sourceTree = BUILT_PRODUCTS_DIR; };
 		0555EBA21EF3DDA10016167F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0555EBAB1EF3E33E0016167F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0595CAD71EF3586A00F2561E /* GitHubRelease.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubRelease.h; sourceTree = "<group>"; };
 		0595CAD81EF3586A00F2561E /* GitHubRelease.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubRelease.m; sourceTree = "<group>"; };
 		0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubReleaseAsset.h; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 		05F82B1B1EF32EA700EC8A93 = {
 			isa = PBXGroup;
 			children = (
+				0555EBAB1EF3E33E0016167F /* README.md */,
 				05F82B271EF32EA700EC8A93 /* GitHubUpdates */,
 				0555EBA11EF3DDA10016167F /* Relauncher */,
 				05F82B261EF32EA700EC8A93 /* Products */,
