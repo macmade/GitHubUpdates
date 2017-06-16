@@ -32,6 +32,7 @@
 #import "GitHubRelease.h"
 #import "GitHubReleaseAsset.h"
 #import "NSError+GitHubUpdates.h"
+#import "NSString+GitHubUpdates.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -366,13 +367,21 @@ NS_ASSUME_NONNULL_END
 
 - ( void )URLSession: ( NSURLSession * )session downloadTask: ( NSURLSessionDownloadTask * )downloadTask didWriteData: ( int64_t )bytesWritten totalBytesWritten: ( int64_t )totalBytesWritten totalBytesExpectedToWrite: ( int64_t )totalBytesExpectedToWrite
 {
+    NSString * message;
+    
     ( void )session;
     ( void )downloadTask;
     ( void )bytesWritten;
     
+    if( totalBytesWritten > 0 && totalBytesExpectedToWrite > 0 )
+    {
+        message = [ NSString stringWithFormat: @"%@ of %@", [ NSString stringForSizeInBytes: ( NSUInteger )totalBytesWritten ], [ NSString stringForSizeInBytes: ( NSUInteger )totalBytesExpectedToWrite ] ];
+    }
+    
     self.progressWindowController.indeterminate = NO;
     self.progressWindowController.progress      = totalBytesWritten;
     self.progressWindowController.progressMax   = totalBytesExpectedToWrite;
+    self.progressWindowController.message       = message;
 }
 
 - ( void )URLSession: ( NSURLSession * )session task: ( NSURLSessionTask * )task didCompleteWithError: ( NSError * )error
