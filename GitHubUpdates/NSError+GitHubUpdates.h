@@ -23,13 +23,18 @@
  ******************************************************************************/
 
 /*!
- * @header      GitHubUpdates.h
+ * @header      NSError+GitHubUpdates.h
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import <GitHubUpdates/GitHubUpdater.h>
-#import <GitHubUpdates/GitHubRelease.h>
-#import <GitHubUpdates/GitHubReleaseAsset.h>
-#import <GitHubUpdates/GitHubProgressWindowController.h>
-#import <GitHubUpdates/GitHubInstallWindowController.h>
+#import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSError( GitHubUpdates )
+
++ ( instancetype )errorWithException: ( NSException * )exception;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -23,13 +23,25 @@
  ******************************************************************************/
 
 /*!
- * @header      GitHubUpdates.h
+ * @file        NSError+GitHubUpdates.m
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import <GitHubUpdates/GitHubUpdater.h>
-#import <GitHubUpdates/GitHubRelease.h>
-#import <GitHubUpdates/GitHubReleaseAsset.h>
-#import <GitHubUpdates/GitHubProgressWindowController.h>
-#import <GitHubUpdates/GitHubInstallWindowController.h>
+#import "NSError+GitHubUpdates.h"
 
+@implementation NSError( GitHubUpdates )
+
++ ( instancetype )errorWithException: ( NSException * )exception
+{
+    NSDictionary * info;
+    
+    info =
+    @{
+        NSLocalizedDescriptionKey             : [ NSString stringWithFormat: NSLocalizedString( @"Caught %@ exception", @"" ), exception.name ],
+        NSLocalizedRecoverySuggestionErrorKey : [ NSString stringWithFormat: NSLocalizedString( @"Reason: %@", @"" ), exception.reason ]
+    };
+    
+    return [ [ NSError alloc ] initWithDomain: NSCocoaErrorDomain code: -1 userInfo: info ];
+}
+
+@end

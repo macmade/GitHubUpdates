@@ -31,6 +31,7 @@
 #import "GitHubProgressWindowController.h"
 #import "GitHubRelease.h"
 #import "GitHubReleaseAsset.h"
+#import "NSError+GitHubUpdates.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 - ( void )download;
 - ( void )stoppedInstalling;
 - ( void )installFromZIP: ( NSURL * )location;
+- ( nullable NSURL * )createTemporaryDirectory;
+- ( BOOL )unzipFile: ( NSURL * )file toDirectory: ( NSURL * )directory;
 
 @end
 
@@ -276,8 +279,87 @@ NS_ASSUME_NONNULL_END
         return;
     }
     
-    [ self stoppedInstalling ];
-    [ self.window close ];
+    dispatch_async
+    (
+        self.queue,
+        ^( void )
+        {
+            NSURL * tempURL;
+            
+            if( ( tempURL = [ self createTemporaryDirectory ] ) == nil )
+            {
+                goto end;
+            }
+            
+            if( [ self unzipFile: location toDirectory: tempURL ] == NO )
+            {
+                goto end;
+            }
+            
+            end:
+            
+            dispatch_async
+            (
+                dispatch_get_main_queue(),
+                ^( void )
+                {
+                    [ self stoppedInstalling ];
+                    [ self.window close ];
+                }
+            );
+        }
+    );
+}
+
+- ( nullable NSURL * )createTemporaryDirectory;
+{
+    NSURL   * url;
+    NSError * error;
+    
+    error = nil;
+    url   = [ NSURL fileURLWithPath: [ NSTemporaryDirectory() stringByAppendingPathComponent: [ NSProcessInfo processInfo ].globallyUniqueString ] isDirectory: YES ];
+    
+    if( [ [ NSFileManager defaultManager ] createDirectoryAtURL: url withIntermediateDirectories: YES attributes: nil error: &error ] == NO )
+    {
+        if( error )
+        {
+            [ self displayError: error ];
+        }
+        else
+        {
+            [ self displayErrorWithMessage: @"Cannot create temporary directory." ];
+        }
+        
+        return nil;
+    }
+    
+    return url;
+}
+
+- ( BOOL )unzipFile: ( NSURL * )file toDirectory: ( NSURL * )directory
+{
+    NSTask * task;
+    
+    task            = [ NSTask new ];
+    task.launchPath = @"/usr/bin/unzip";
+    task.arguments  = @[ @"-o", file.path, @"-d", directory.path ];
+    
+    @try
+    {
+        [ task launch ];
+        [ task waitUntilExit ];
+    }
+    @catch( NSException * e )
+    {
+        [ self displayError: [ NSError errorWithException: e ] ];
+        
+        return NO;
+    }
+    
+    ( void )file;
+    ( void )directory;
+    
+    return NO;
 }
 
 #pragma mark - NSURLSessionDownloadDelegate
