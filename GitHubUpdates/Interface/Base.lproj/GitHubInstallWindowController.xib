@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
@@ -185,6 +186,9 @@ DQ
                     <constraint firstItem="5FD-ud-Zc2" firstAttribute="height" secondItem="EiT-Mj-1SZ" secondAttribute="height" id="iBG-IS-u0Z"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="initialFirstResponder" destination="oso-pp-txM" id="O5G-uB-5Ud"/>
+            </connections>
             <point key="canvasLocation" x="9" y="-307"/>
         </window>
     </objects>

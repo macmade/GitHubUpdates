@@ -10,6 +10,8 @@
 		052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		052C708F1EF370BB000B8D06 /* GitHubInstallWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */; };
 		052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */; };
+		0555EB9A1EF3D3810016167F /* NSBundle+GitHubUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = 0555EB981EF3D3810016167F /* NSBundle+GitHubUpdates.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0555EB9B1EF3D3810016167F /* NSBundle+GitHubUpdates.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EB991EF3D3810016167F /* NSBundle+GitHubUpdates.m */; };
 		0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CAD71EF3586A00F2561E /* GitHubRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595CAD81EF3586A00F2561E /* GitHubRelease.m */; };
 		0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +36,8 @@
 		052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubInstallWindowController.h; sourceTree = "<group>"; };
 		052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubInstallWindowController.m; sourceTree = "<group>"; };
 		052C70911EF370E1000B8D06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubInstallWindowController.xib; sourceTree = "<group>"; };
+		0555EB981EF3D3810016167F /* NSBundle+GitHubUpdates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+GitHubUpdates.h"; sourceTree = "<group>"; };
+		0555EB991EF3D3810016167F /* NSBundle+GitHubUpdates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+GitHubUpdates.m"; sourceTree = "<group>"; };
 		0595CAD71EF3586A00F2561E /* GitHubRelease.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubRelease.h; sourceTree = "<group>"; };
 		0595CAD81EF3586A00F2561E /* GitHubRelease.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubRelease.m; sourceTree = "<group>"; };
 		0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubReleaseAsset.h; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 				05ED064F1EF33BB000C61AFA /* GitHubProgressWindowController.m */,
 				052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */,
 				052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */,
+				0555EB981EF3D3810016167F /* NSBundle+GitHubUpdates.h */,
+				0555EB991EF3D3810016167F /* NSBundle+GitHubUpdates.m */,
 				05B6BACF1EF3C51400842E6D /* NSError+GitHubUpdates.h */,
 				05B6BAD01EF3C51400842E6D /* NSError+GitHubUpdates.m */,
 				05B6BAD31EF3C7B300842E6D /* NSString+GitHubUpdates.h */,
@@ -152,6 +158,7 @@
 				05B6BAD51EF3C7CA00842E6D /* NSString+GitHubUpdates.h in Headers */,
 				052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */,
 				0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */,
+				0555EB9A1EF3D3810016167F /* NSBundle+GitHubUpdates.h in Headers */,
 				05ED064C1EF338B800C61AFA /* GitHubUpdater.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */,
+				0555EB9B1EF3D3810016167F /* NSBundle+GitHubUpdates.m in Sources */,
 				05F1E5F81EF381C00045C4CD /* Pair.m in Sources */,
 				05ED064B1EF338B200C61AFA /* GitHubUpdater.m in Sources */,
 				05B6BAD21EF3C51400842E6D /* NSError+GitHubUpdates.m in Sources */,

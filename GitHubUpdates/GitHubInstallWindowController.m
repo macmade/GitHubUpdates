@@ -33,6 +33,7 @@
 #import "GitHubReleaseAsset.h"
 #import "NSError+GitHubUpdates.h"
 #import "NSString+GitHubUpdates.h"
+#import "NSBundle+GitHubUpdates.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -58,8 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
 - ( void )download;
 - ( void )stoppedInstalling;
 - ( void )installFromZIP: ( NSURL * )location;
+- ( NSString * )temporaryFilePath;
 - ( nullable NSURL * )createTemporaryDirectory;
 - ( BOOL )unzipFile: ( NSURL * )file toDirectory: ( NSURL * )directory;
+- ( nullable NSURL * )findAppInDirectory: ( NSURL * )directory;
+- ( BOOL )checkCodeSigning: ( NSURL * )app;
+- ( BOOL )replaceApp: ( NSURL * )app;
 
 @end
 
@@ -114,7 +119,7 @@ NS_ASSUME_NONNULL_END
     self.window.titlebarAppearsTransparent = YES;
     self.window.titleVisibility            = NSWindowTitleHidden;
     
-    self.textView.textContainerInset = NSMakeSize( 10.0, 20.0 );
+    self.textView.textContainerInset = NSMakeSize( 10.0, 15.0 );
     
     app     = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleName" ];
     version = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ];
@@ -187,7 +192,7 @@ NS_ASSUME_NONNULL_END
 
 - ( void )displayErrorWithMessage: ( NSString * )message
 {
-    [ self displayErrorWithTitle: @"Error" message: message ];
+    [ self displayErrorWithTitle: NSLocalizedString( @"Error", @"" ) message: message ];
 }
 
 - ( void )displayErrorWithTitle: ( NSString * )title message: ( NSString * )message;
@@ -217,7 +222,8 @@ NS_ASSUME_NONNULL_END
 
 - ( void )download
 {
-    self.canceled = NO;
+    self.canceled                         = NO;
+    self.progressWindowController.message = NSLocalizedString( @"Connecting...", @"" );
                     
     dispatch_async
     (
@@ -271,6 +277,7 @@ NS_ASSUME_NONNULL_END
     self.progressWindowController.indeterminate = YES;
     self.progressWindowController.progress      = 0.0;
     self.progressWindowController.progressMax   = 0.0;
+    self.progressWindowController.message       = NSLocalizedString( @"Expanding archive...", @"" );
     
     if( [ [ NSFileManager defaultManager ] fileExistsAtPath: location.path isDirectory: nil ] == NO )
     {
@@ -286,6 +293,7 @@ NS_ASSUME_NONNULL_END
         ^( void )
         {
             NSURL * tempURL;
+            NSURL * appURL;
             
             if( ( tempURL = [ self createTemporaryDirectory ] ) == nil )
             {
@@ -296,6 +304,37 @@ NS_ASSUME_NONNULL_END
             {
                 goto end;
             }
+            
+            if( ( appURL = [ self findAppInDirectory: tempURL ] ) == nil )
+            {
+                goto end;
+            }
+            
+            if( [ self checkCodeSigning: appURL ] == NO )
+            {
+                goto end;
+            }
+            
+            if( [ self replaceApp: appURL ] == NO )
+            {
+                goto end;
+            }
+            
+            dispatch_sync
+            (
+                dispatch_get_main_queue(),
+                ^( void )
+                {
+                    NSAlert * alert;
+                    
+                    alert                 = [ NSAlert new ];
+                    alert.messageText     = NSLocalizedString( @"Installation Successfull", @"" );
+                    alert.informativeText = NSLocalizedString( @"The application will now be restarted.", @"" );
+                    
+                    [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
+                    [ alert runModal ];
+                }
+            );
             
             end:
             
@@ -312,13 +351,18 @@ NS_ASSUME_NONNULL_END
     );
 }
 
+- ( NSString * )temporaryFilePath
+{
+    return [ NSTemporaryDirectory() stringByAppendingPathComponent: [ NSProcessInfo processInfo ].globallyUniqueString ];
+}
+
 - ( nullable NSURL * )createTemporaryDirectory;
 {
     NSURL   * url;
     NSError * error;
     
     error = nil;
-    url   = [ NSURL fileURLWithPath: [ NSTemporaryDirectory() stringByAppendingPathComponent: [ NSProcessInfo processInfo ].globallyUniqueString ] isDirectory: YES ];
+    url   = [ NSURL fileURLWithPath: [ self temporaryFilePath ] isDirectory: YES ];
     
     if( [ [ NSFileManager defaultManager ] createDirectoryAtURL: url withIntermediateDirectories: YES attributes: nil error: &error ] == NO )
     {
@@ -328,7 +372,7 @@ NS_ASSUME_NONNULL_END
         }
         else
         {
-            [ self displayErrorWithMessage: @"Cannot create temporary directory." ];
+            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot create temporary directory.", @"" ) ];
         }
         
         return nil;
@@ -357,10 +401,156 @@ NS_ASSUME_NONNULL_END
         return NO;
     }
     
-    ( void )file;
-    ( void )directory;
+    if( task.terminationStatus != 0 )
+    {
+        [ self displayErrorWithMessage: NSLocalizedString( @"Error expanding the ZIP archive.", @"" ) ];
+        
+        return NO;
+    }
     
-    return NO;
+    return YES;
+}
+
+- ( nullable NSURL * )findAppInDirectory: ( NSURL * )directory
+{
+    NSURL    * url;
+    NSBundle * bundle;
+    NSString * bundleID;
+    NSString * version;
+    
+    dispatch_sync
+    (
+        dispatch_get_main_queue(),
+        ^( void )
+        {
+            self.progressWindowController.message = NSLocalizedString( @"Finding application...", @"" );
+        }
+    );
+    
+    for( url in [ [ NSFileManager defaultManager ] contentsOfDirectoryAtURL: directory includingPropertiesForKeys: nil options: NSDirectoryEnumerationSkipsSubdirectoryDescendants error: NULL ] )
+    {
+        if( [ url.pathExtension isEqualToString: @"app" ] == NO )
+        {
+            continue;
+        }
+        
+        bundle = [ NSBundle bundleWithURL: url ];
+        
+        if( bundle == nil )
+        {
+            continue;
+        }
+        
+        bundleID = [ bundle objectForInfoDictionaryKey: @"CFBundleIdentifier" ];
+        version  = [ bundle objectForInfoDictionaryKey: @"CFBundleShortVersionString" ];
+        
+        if( bundleID == nil || version == nil )
+        {
+            continue;
+        }
+        
+        if( [ [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleIdentifier" ] isEqualToString: bundleID ] == NO )
+        {
+            continue;
+        }
+        
+        if( [ version isEqualToString: self.githubRelease.tagName ] == NO )
+        {
+            {
+                NSString * message;
+                
+                message = [ NSString stringWithFormat: NSLocalizedString( @"Invalid application version for %@. Expected %@, found %@.", @"" ), bundleID, self.githubRelease.tagName, version ];
+                
+                [ self displayErrorWithTitle: NSLocalizedString( @"Version mismatch", @"" ) message: message ];
+            }
+            
+            return nil;
+        }
+        
+        return url;
+    }
+    
+    [ self displayErrorWithMessage: NSLocalizedString( @"Cannot find a valid application in the extracted archive.", @"" ) ];
+    
+    return nil;
+}
+
+- ( BOOL )checkCodeSigning: ( NSURL * )app
+{
+    NSBundle * b1;
+    NSBundle * b2;
+    BOOL       cs1;
+    BOOL       cs2;
+    NSString * id1;
+    NSString * id2;
+    
+    dispatch_sync
+    (
+        dispatch_get_main_queue(),
+        ^( void )
+        {
+            self.progressWindowController.message = NSLocalizedString( @"Verifying code-signing...", @"" );
+        }
+    );
+    
+    b1  = [ NSBundle mainBundle ];
+    b2  = [ NSBundle bundleWithURL: app ];
+    cs1 = b1.isCodeSigned;
+    cs2 = b2.isCodeSigned;
+    id1 = b1.codeSigningIdentity;
+    id2 = b2.codeSigningIdentity;
+    
+    if( cs1 == YES && cs2 == NO )
+    {
+        [ self displayErrorWithTitle: NSLocalizedString( @"Code-Signing Error", @"" ) message: NSLocalizedString( @"Downloaded update is not code-signed, while installed version is code-signed.", @"" ) ];
+        
+        return NO;
+    }
+    
+    if( cs1 == YES && cs2 == YES && ( id1 == nil || id2 == nil ) )
+    {
+        [ self displayErrorWithTitle: NSLocalizedString( @"Code-Signing Error", @"" ) message: NSLocalizedString( @"Cannot verify code-signing identity.", @"" ) ];
+        
+        return NO;
+    }
+    
+    if( cs1 == YES && cs2 == YES && [ id1 isEqualToString: id2 ] == NO )
+    {
+        [ self displayErrorWithTitle: NSLocalizedString( @"Code-Signing Error", @"" ) message: [ NSString stringWithFormat: NSLocalizedString( @"Code signing identity mismatch. %@ vs %@", @"" ), id1, id2 ] ];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- ( BOOL )replaceApp: ( NSURL * )app
+{
+    NSError * error;
+    NSURL   * trashURL;
+    
+    if( [ [ NSFileManager defaultManager ] trashItemAtURL: [ NSBundle mainBundle ].bundleURL resultingItemURL: &trashURL error: &error ] == NO )
+    {
+        [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the original application to the trash.", @"" ) ];
+        
+        return NO;
+    }
+    
+    if( [ [ NSFileManager defaultManager ] moveItemAtURL: app toURL: [ NSBundle mainBundle ].bundleURL error: &error ] == NO )
+    {
+        if( [ [ NSFileManager defaultManager ] moveItemAtURL: trashURL toURL: [ NSBundle mainBundle ].bundleURL error: &error ] == NO )
+        {
+            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the new application.", @"" ) ];
+        }
+        else
+        {
+            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the new application. Original application is in your Trash", @"" ) ];
+        }
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - NSURLSessionDownloadDelegate
@@ -375,7 +565,7 @@ NS_ASSUME_NONNULL_END
     
     if( totalBytesWritten > 0 && totalBytesExpectedToWrite > 0 )
     {
-        message = [ NSString stringWithFormat: @"%@ of %@", [ NSString stringForSizeInBytes: ( NSUInteger )totalBytesWritten ], [ NSString stringForSizeInBytes: ( NSUInteger )totalBytesExpectedToWrite ] ];
+        message = [ NSString stringWithFormat: NSLocalizedString( @"%@ of %@", @"" ), [ NSString stringForSizeInBytes: ( NSUInteger )totalBytesWritten ], [ NSString stringForSizeInBytes: ( NSUInteger )totalBytesExpectedToWrite ] ];
     }
     
     self.progressWindowController.indeterminate = NO;
@@ -398,10 +588,32 @@ NS_ASSUME_NONNULL_END
 
 - ( void )URLSession: ( NSURLSession * )session downloadTask: ( NSURLSessionDownloadTask * )downloadTask didFinishDownloadingToURL: ( NSURL * )location
 {
+    NSURL   * url;
+    NSError * error;
+    
     ( void )session;
     ( void )downloadTask;
     
-    [ self installFromZIP: location ];
+    error = nil;
+    url   = [ NSURL fileURLWithPath: [ self temporaryFilePath ] ];
+    
+    if( [ [ NSFileManager defaultManager ] moveItemAtURL: location toURL: url error: &error ] == NO )
+    {
+        [ self stoppedInstalling ];
+        
+        if( error )
+        {
+            [ self displayError: error ];
+        }
+        else
+        {
+            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move downloaded file.", @"" ) ];
+        }
+        
+        return;
+    }
+    
+    [ self installFromZIP: url ];
 }
 
 @end

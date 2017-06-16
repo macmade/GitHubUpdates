@@ -23,38 +23,19 @@
  ******************************************************************************/
 
 /*!
- * @file        MainWindowController.m
+ * @header      NSBundle+GitHubUpdates.h
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import "MainWindowController.h"
-
-@import GitHubUpdates;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainWindowController()
+@interface NSBundle( GitHubUpdates )
 
-@property( atomic, readwrite, strong, nullable ) IBOutlet GitHubUpdater * updater;
+@property( nonatomic, readonly           ) BOOL       isCodeSigned;
+@property( nonatomic, readonly, nullable ) NSString * codeSigningIdentity;
 
 @end
 
 NS_ASSUME_NONNULL_END
-
-@implementation MainWindowController
-
-- ( instancetype )init
-{
-    return [ self initWithWindowNibName: NSStringFromClass( [ self class ] ) ];
-}
-
-- ( void )windowDidLoad
-{
-    [ super windowDidLoad ];
-    
-    self.window.titlebarAppearsTransparent = YES;
-    
-    [ self.updater checkForUpdatesInBackground ];
-}
-
-@end
