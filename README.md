@@ -17,6 +17,8 @@ About
 **GitHubUpdates is Cocoa framework to install application updates from GitHub releases.**  
 If you ever used [Sparkle](https://github.com/sparkle-project/Sparkle), this project provided the same kind of functionalities, but works with your GitHub releases and tags.
 
+![Update](Assets/Update.png "Update")
+
 How to use
 ----------
 
@@ -39,6 +41,8 @@ In order to check for updates, a `GitHubUpdater` object needs to be created:
 
 Note that you can also create the `GitHubUpdater` instance with **InterfaceBuilder**.  
 The `user` and `repository` properties are inspectable, so you can set them with the Interface Builder inspector palette.
+
+![IB](Assets/IB.png "IB")
 
 You can then check for updates using the IB action:
 
