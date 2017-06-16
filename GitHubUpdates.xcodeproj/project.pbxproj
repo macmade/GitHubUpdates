@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */; };
+		052C708F1EF370BB000B8D06 /* GitHubInstallWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */; };
+		052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */; };
+		0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CAD71EF3586A00F2561E /* GitHubRelease.h */; };
+		0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595CAD81EF3586A00F2561E /* GitHubRelease.m */; };
+		0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */; };
+		0595CADE1EF35CAB00F2561E /* GitHubReleaseAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595CADC1EF35CAB00F2561E /* GitHubReleaseAsset.m */; };
+		05ED064B1EF338B200C61AFA /* GitHubUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED064A1EF337D200C61AFA /* GitHubUpdater.m */; };
+		05ED064C1EF338B800C61AFA /* GitHubUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED06491EF337D200C61AFA /* GitHubUpdater.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05ED064D1EF338B800C61AFA /* GitHubUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED06481EF337D200C61AFA /* GitHubUpdates.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05ED06501EF33BB000C61AFA /* GitHubProgressWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED064E1EF33BB000C61AFA /* GitHubProgressWindowController.h */; };
+		05ED06511EF33BB000C61AFA /* GitHubProgressWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED064F1EF33BB000C61AFA /* GitHubProgressWindowController.m */; };
+		05ED06541EF33BD400C61AFA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ED06531EF33BCF00C61AFA /* Cocoa.framework */; };
+		05ED065A1EF33D8E00C61AFA /* GitHubProgressWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05ED06581EF33C7D00C61AFA /* GitHubProgressWindowController.xib */; };
+		05F1E5F71EF381C00045C4CD /* Pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F1E5F51EF381C00045C4CD /* Pair.h */; };
+		05F1E5F81EF381C00045C4CD /* Pair.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F1E5F61EF381C00045C4CD /* Pair.m */; };
+		05F1E5FD1EF3A17A0045C4CD /* GitHubTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 05F1E5FA1EF3A06D0045C4CD /* GitHubTemplate.pdf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubInstallWindowController.h; sourceTree = "<group>"; };
+		052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubInstallWindowController.m; sourceTree = "<group>"; };
+		052C70911EF370E1000B8D06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubInstallWindowController.xib; sourceTree = "<group>"; };
+		0595CAD71EF3586A00F2561E /* GitHubRelease.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubRelease.h; sourceTree = "<group>"; };
+		0595CAD81EF3586A00F2561E /* GitHubRelease.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubRelease.m; sourceTree = "<group>"; };
+		0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubReleaseAsset.h; sourceTree = "<group>"; };
+		0595CADC1EF35CAB00F2561E /* GitHubReleaseAsset.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubReleaseAsset.m; sourceTree = "<group>"; };
+		05ED06481EF337D200C61AFA /* GitHubUpdates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubUpdates.h; sourceTree = "<group>"; };
+		05ED06491EF337D200C61AFA /* GitHubUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubUpdater.h; sourceTree = "<group>"; };
+		05ED064A1EF337D200C61AFA /* GitHubUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubUpdater.m; sourceTree = "<group>"; };
+		05ED064E1EF33BB000C61AFA /* GitHubProgressWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubProgressWindowController.h; sourceTree = "<group>"; };
+		05ED064F1EF33BB000C61AFA /* GitHubProgressWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubProgressWindowController.m; sourceTree = "<group>"; };
+		05ED06531EF33BCF00C61AFA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		05ED06591EF33C7D00C61AFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubProgressWindowController.xib; sourceTree = "<group>"; };
+		05F1E5F51EF381C00045C4CD /* Pair.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pair.h; sourceTree = "<group>"; };
+		05F1E5F61EF381C00045C4CD /* Pair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pair.m; sourceTree = "<group>"; };
+		05F1E5FA1EF3A06D0045C4CD /* GitHubTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = GitHubTemplate.pdf; sourceTree = "<group>"; };
+		05F82B251EF32EA700EC8A93 /* GitHubUpdates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHubUpdates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05F82B291EF32EA700EC8A93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05F82B211EF32EA700EC8A93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05ED06541EF33BD400C61AFA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05ED06521EF33BCD00C61AFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05ED06531EF33BCF00C61AFA /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		05ED06551EF33C7D00C61AFA /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				05F1E5F91EF3A06D0045C4CD /* Images */,
+				05ED06581EF33C7D00C61AFA /* GitHubProgressWindowController.xib */,
+				052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		05F1E5F91EF3A06D0045C4CD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				05F1E5FA1EF3A06D0045C4CD /* GitHubTemplate.pdf */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		05F82B1B1EF32EA700EC8A93 = {
+			isa = PBXGroup;
+			children = (
+				05F82B271EF32EA700EC8A93 /* GitHubUpdates */,
+				05F82B261EF32EA700EC8A93 /* Products */,
+				05ED06521EF33BCD00C61AFA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		05F82B261EF32EA700EC8A93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05F82B251EF32EA700EC8A93 /* GitHubUpdates.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05F82B271EF32EA700EC8A93 /* GitHubUpdates */ = {
+			isa = PBXGroup;
+			children = (
+				05ED06491EF337D200C61AFA /* GitHubUpdater.h */,
+				05ED064A1EF337D200C61AFA /* GitHubUpdater.m */,
+				0595CAD71EF3586A00F2561E /* GitHubRelease.h */,
+				0595CAD81EF3586A00F2561E /* GitHubRelease.m */,
+				0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */,
+				0595CADC1EF35CAB00F2561E /* GitHubReleaseAsset.m */,
+				05ED064E1EF33BB000C61AFA /* GitHubProgressWindowController.h */,
+				05ED064F1EF33BB000C61AFA /* GitHubProgressWindowController.m */,
+				052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */,
+				052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */,
+				05F1E5F51EF381C00045C4CD /* Pair.h */,
+				05F1E5F61EF381C00045C4CD /* Pair.m */,
+				05ED06481EF337D200C61AFA /* GitHubUpdates.h */,
+				05F82B291EF32EA700EC8A93 /* Info.plist */,
+				05ED06551EF33C7D00C61AFA /* Interface */,
+			);
+			path = GitHubUpdates;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		05F82B221EF32EA700EC8A93 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F1E5F71EF381C00045C4CD /* Pair.h in Headers */,
+				05ED06501EF33BB000C61AFA /* GitHubProgressWindowController.h in Headers */,
+				0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */,
+				05ED064D1EF338B800C61AFA /* GitHubUpdates.h in Headers */,
+				052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */,
+				0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */,
+				05ED064C1EF338B800C61AFA /* GitHubUpdater.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		05F82B241EF32EA700EC8A93 /* GitHubUpdates */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05F82B2D1EF32EA700EC8A93 /* Build configuration list for PBXNativeTarget "GitHubUpdates" */;
+			buildPhases = (
+				05F82B201EF32EA700EC8A93 /* Sources */,
+				05F82B211EF32EA700EC8A93 /* Frameworks */,
+				05F82B221EF32EA700EC8A93 /* Headers */,
+				05F82B231EF32EA700EC8A93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GitHubUpdates;
+			productName = GitHubUpdates;
+			productReference = 05F82B251EF32EA700EC8A93 /* GitHubUpdates.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05F82B1C1EF32EA700EC8A93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "XS-Labs";
+				TargetAttributes = {
+					05F82B241EF32EA700EC8A93 = {
+						CreatedOnToolsVersion = 9.0;
+					};
+				};
+			};
+			buildConfigurationList = 05F82B1F1EF32EA700EC8A93 /* Build configuration list for PBXProject "GitHubUpdates" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05F82B1B1EF32EA700EC8A93;
+			productRefGroup = 05F82B261EF32EA700EC8A93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05F82B241EF32EA700EC8A93 /* GitHubUpdates */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05F82B231EF32EA700EC8A93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */,
+				05F1E5FD1EF3A17A0045C4CD /* GitHubTemplate.pdf in Resources */,
+				05ED065A1EF33D8E00C61AFA /* GitHubProgressWindowController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05F82B201EF32EA700EC8A93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */,
+				05F1E5F81EF381C00045C4CD /* Pair.m in Sources */,
+				05ED064B1EF338B200C61AFA /* GitHubUpdater.m in Sources */,
+				052C708F1EF370BB000B8D06 /* GitHubInstallWindowController.m in Sources */,
+				05ED06511EF33BB000C61AFA /* GitHubProgressWindowController.m in Sources */,
+				0595CADE1EF35CAB00F2561E /* GitHubReleaseAsset.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				052C70911EF370E1000B8D06 /* Base */,
+			);
+			name = GitHubInstallWindowController.xib;
+			sourceTree = "<group>";
+		};
+		05ED06581EF33C7D00C61AFA /* GitHubProgressWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05ED06591EF33C7D00C61AFA /* Base */,
+			);
+			name = GitHubProgressWindowController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05F82B2B1EF32EA700EC8A93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_DEADCODE_DEADSTORES = YES;
+				CLANG_ANALYZER_GCD = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_MEMORY_MANAGEMENT = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ANALYZER_OBJC_ATSYNC = YES;
+				CLANG_ANALYZER_OBJC_COLLECTIONS = YES;
+				CLANG_ANALYZER_OBJC_DEALLOC = YES;
+				CLANG_ANALYZER_OBJC_GENERICS = YES;
+				CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES = YES;
+				CLANG_ANALYZER_OBJC_NSCFERROR = YES;
+				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
+				CLANG_ANALYZER_OBJC_SELF_INIT = YES;
+				CLANG_ANALYZER_OBJC_UNUSED_IVARS = YES;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_GETPW_GETS = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_VFORK = YES;
+				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION = deep;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_INTEGER = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES_ERROR;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES_ERROR;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		05F82B2C1EF32EA700EC8A93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_DEADCODE_DEADSTORES = YES;
+				CLANG_ANALYZER_GCD = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_MEMORY_MANAGEMENT = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ANALYZER_OBJC_ATSYNC = YES;
+				CLANG_ANALYZER_OBJC_COLLECTIONS = YES;
+				CLANG_ANALYZER_OBJC_DEALLOC = YES;
+				CLANG_ANALYZER_OBJC_GENERICS = YES;
+				CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES = YES;
+				CLANG_ANALYZER_OBJC_NSCFERROR = YES;
+				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
+				CLANG_ANALYZER_OBJC_SELF_INIT = YES;
+				CLANG_ANALYZER_OBJC_UNUSED_IVARS = YES;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_GETPW_GETS = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_VFORK = YES;
+				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION = deep;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_INTEGER = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES_ERROR;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES_ERROR;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES_ERROR;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		05F82B2E1EF32EA700EC8A93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = GitHubUpdates/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.GitHubUpdates";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05F82B2F1EF32EA700EC8A93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = GitHubUpdates/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.GitHubUpdates";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05F82B1F1EF32EA700EC8A93 /* Build configuration list for PBXProject "GitHubUpdates" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05F82B2B1EF32EA700EC8A93 /* Debug */,
+				05F82B2C1EF32EA700EC8A93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05F82B2D1EF32EA700EC8A93 /* Build configuration list for PBXNativeTarget "GitHubUpdates" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05F82B2E1EF32EA700EC8A93 /* Debug */,
+				05F82B2F1EF32EA700EC8A93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05F82B1C1EF32EA700EC8A93 /* Project object */;
+}
