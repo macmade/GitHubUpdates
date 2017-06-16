@@ -1,0 +1,8 @@
+language: objective-c
+osx_image: xcode8.3
+install:
+- gem install xcpretty
+script:
+- set -o pipefail && xcodebuild -project "TestApp.xcodeproj" -scheme "TestApp" build analyze | xcpretty
+notifications:
+    slack: xs-labs:FXh1yLXNkpcVxKZhZU6icdhI
