@@ -58,7 +58,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 1;
+			dstSubfolderSpec = 6;
 			files = (
 				0555EBAA1EF3DDF60016167F /* Relauncher in CopyFiles */,
 			);

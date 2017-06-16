@@ -332,8 +332,9 @@ NS_ASSUME_NONNULL_END
                 dispatch_get_main_queue(),
                 ^( void )
                 {
-                    NSAlert * alert;
-                    NSTask  * task;
+                    NSAlert  * alert;
+                    NSTask   * task;
+                    NSString * path;
                     
                     [ self stoppedInstalling ];
                     [ self.window close ];
@@ -347,11 +348,23 @@ NS_ASSUME_NONNULL_END
                         [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
                         [ alert runModal ];
                         
+                        path            = [ NSBundle bundleForClass: [ self class ] ].bundlePath;
+                        path            = [ path stringByAppendingPathComponent: @"Versions" ];
+                        path            = [ path stringByAppendingPathComponent: @"A" ];
+                        path            = [ path stringByAppendingPathComponent: @"Relauncher" ];
                         task            = [ NSTask new ];
-                        task.launchPath = [ [ NSBundle bundleForClass: [ self class ] ].bundlePath stringByAppendingPathComponent: @"Relauncher" ];
+                        task.launchPath = path;
                         task.arguments  = @[ [ NSBundle mainBundle ].bundlePath ];
                         
-                        [ task launch ];
+                        @try
+                        {
+                            [ task launch ];
+                        }
+                        @catch( NSException * e )
+                        {
+                            ( void )e;
+                        }
+                        
                         [ NSApp terminate: nil ];
                     }
                 }
