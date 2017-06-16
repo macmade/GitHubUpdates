@@ -12,6 +12,8 @@
 		052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */; };
 		0555EB9A1EF3D3810016167F /* NSBundle+GitHubUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = 0555EB981EF3D3810016167F /* NSBundle+GitHubUpdates.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0555EB9B1EF3D3810016167F /* NSBundle+GitHubUpdates.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EB991EF3D3810016167F /* NSBundle+GitHubUpdates.m */; };
+		0555EBA31EF3DDA10016167F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EBA21EF3DDA10016167F /* main.m */; };
+		0555EBAA1EF3DDF60016167F /* Relauncher in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0555EBA01EF3DDA10016167F /* Relauncher */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CAD71EF3586A00F2561E /* GitHubRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595CAD81EF3586A00F2561E /* GitHubRelease.m */; };
 		0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -32,12 +34,46 @@
 		05F1E5FD1EF3A17A0045C4CD /* GitHubTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 05F1E5FA1EF3A06D0045C4CD /* GitHubTemplate.pdf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0555EBA71EF3DDE70016167F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05F82B1C1EF32EA700EC8A93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0555EB9F1EF3DDA10016167F;
+			remoteInfo = Relauncher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0555EB9E1EF3DDA10016167F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		0555EBA91EF3DDEF0016167F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 1;
+			files = (
+				0555EBAA1EF3DDF60016167F /* Relauncher in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubInstallWindowController.h; sourceTree = "<group>"; };
 		052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubInstallWindowController.m; sourceTree = "<group>"; };
 		052C70911EF370E1000B8D06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubInstallWindowController.xib; sourceTree = "<group>"; };
 		0555EB981EF3D3810016167F /* NSBundle+GitHubUpdates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+GitHubUpdates.h"; sourceTree = "<group>"; };
 		0555EB991EF3D3810016167F /* NSBundle+GitHubUpdates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+GitHubUpdates.m"; sourceTree = "<group>"; };
+		0555EBA01EF3DDA10016167F /* Relauncher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Relauncher; sourceTree = BUILT_PRODUCTS_DIR; };
+		0555EBA21EF3DDA10016167F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0595CAD71EF3586A00F2561E /* GitHubRelease.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubRelease.h; sourceTree = "<group>"; };
 		0595CAD81EF3586A00F2561E /* GitHubRelease.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubRelease.m; sourceTree = "<group>"; };
 		0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubReleaseAsset.h; sourceTree = "<group>"; };
@@ -61,6 +97,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0555EB9D1EF3DDA10016167F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05F82B211EF32EA700EC8A93 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -72,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0555EBA11EF3DDA10016167F /* Relauncher */ = {
+			isa = PBXGroup;
+			children = (
+				0555EBA21EF3DDA10016167F /* main.m */,
+			);
+			path = Relauncher;
+			sourceTree = "<group>";
+		};
 		05ED06521EF33BCD00C61AFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				05F82B271EF32EA700EC8A93 /* GitHubUpdates */,
+				0555EBA11EF3DDA10016167F /* Relauncher */,
 				05F82B261EF32EA700EC8A93 /* Products */,
 				05ED06521EF33BCD00C61AFA /* Frameworks */,
 			);
@@ -111,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				05F82B251EF32EA700EC8A93 /* GitHubUpdates.framework */,
+				0555EBA01EF3DDA10016167F /* Relauncher */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,6 +219,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0555EB9F1EF3DDA10016167F /* Relauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0555EBA41EF3DDA10016167F /* Build configuration list for PBXNativeTarget "Relauncher" */;
+			buildPhases = (
+				0555EB9C1EF3DDA10016167F /* Sources */,
+				0555EB9D1EF3DDA10016167F /* Frameworks */,
+				0555EB9E1EF3DDA10016167F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Relauncher;
+			productName = Relauncher;
+			productReference = 0555EBA01EF3DDA10016167F /* Relauncher */;
+			productType = "com.apple.product-type.tool";
+		};
 		05F82B241EF32EA700EC8A93 /* GitHubUpdates */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05F82B2D1EF32EA700EC8A93 /* Build configuration list for PBXNativeTarget "GitHubUpdates" */;
@@ -174,10 +244,12 @@
 				05F82B211EF32EA700EC8A93 /* Frameworks */,
 				05F82B221EF32EA700EC8A93 /* Headers */,
 				05F82B231EF32EA700EC8A93 /* Resources */,
+				0555EBA91EF3DDEF0016167F /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0555EBA81EF3DDE70016167F /* PBXTargetDependency */,
 			);
 			name = GitHubUpdates;
 			productName = GitHubUpdates;
@@ -193,6 +265,9 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
+					0555EB9F1EF3DDA10016167F = {
+						CreatedOnToolsVersion = 9.0;
+					};
 					05F82B241EF32EA700EC8A93 = {
 						CreatedOnToolsVersion = 9.0;
 					};
@@ -212,6 +287,7 @@
 			projectRoot = "";
 			targets = (
 				05F82B241EF32EA700EC8A93 /* GitHubUpdates */,
+				0555EB9F1EF3DDA10016167F /* Relauncher */,
 			);
 		};
 /* End PBXProject section */
@@ -230,6 +306,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0555EB9C1EF3DDA10016167F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0555EBA31EF3DDA10016167F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05F82B201EF32EA700EC8A93 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +331,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0555EBA81EF3DDE70016167F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0555EB9F1EF3DDA10016167F /* Relauncher */;
+			targetProxy = 0555EBA71EF3DDE70016167F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */ = {
@@ -268,6 +360,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0555EBA51EF3DDA10016167F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0555EBA61EF3DDA10016167F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		05F82B2B1EF32EA700EC8A93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -547,6 +653,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0555EBA41EF3DDA10016167F /* Build configuration list for PBXNativeTarget "Relauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0555EBA51EF3DDA10016167F /* Debug */,
+				0555EBA61EF3DDA10016167F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		05F82B1F1EF32EA700EC8A93 /* Build configuration list for PBXProject "GitHubUpdates" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -292,8 +292,11 @@ NS_ASSUME_NONNULL_END
         self.queue,
         ^( void )
         {
+            BOOL    success;
             NSURL * tempURL;
             NSURL * appURL;
+            
+            success = NO;
             
             if( ( tempURL = [ self createTemporaryDirectory ] ) == nil )
             {
@@ -320,21 +323,7 @@ NS_ASSUME_NONNULL_END
                 goto end;
             }
             
-            dispatch_sync
-            (
-                dispatch_get_main_queue(),
-                ^( void )
-                {
-                    NSAlert * alert;
-                    
-                    alert                 = [ NSAlert new ];
-                    alert.messageText     = NSLocalizedString( @"Installation Successfull", @"" );
-                    alert.informativeText = NSLocalizedString( @"The application will now be restarted.", @"" );
-                    
-                    [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
-                    [ alert runModal ];
-                }
-            );
+            success = YES;
             
             end:
             
@@ -343,8 +332,28 @@ NS_ASSUME_NONNULL_END
                 dispatch_get_main_queue(),
                 ^( void )
                 {
+                    NSAlert * alert;
+                    NSTask  * task;
+                    
                     [ self stoppedInstalling ];
                     [ self.window close ];
+                    
+                    if( success )
+                    {
+                        alert                 = [ NSAlert new ];
+                        alert.messageText     = NSLocalizedString( @"Installation Successfull", @"" );
+                        alert.informativeText = NSLocalizedString( @"The application will now be restarted.", @"" );
+                        
+                        [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
+                        [ alert runModal ];
+                        
+                        task            = [ NSTask new ];
+                        task.launchPath = [ [ NSBundle bundleForClass: [ self class ] ].bundlePath stringByAppendingPathComponent: @"Relauncher" ];
+                        task.arguments  = @[ [ NSBundle mainBundle ].bundlePath ];
+                        
+                        [ task launch ];
+                        [ NSApp terminate: nil ];
+                    }
                 }
             );
         }
