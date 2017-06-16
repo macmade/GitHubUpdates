@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */; };
+		052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		052C708F1EF370BB000B8D06 /* GitHubInstallWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */; };
 		052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */; };
-		0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CAD71EF3586A00F2561E /* GitHubRelease.h */; };
+		0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CAD71EF3586A00F2561E /* GitHubRelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595CAD81EF3586A00F2561E /* GitHubRelease.m */; };
-		0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */; };
+		0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0595CADB1EF35CAB00F2561E /* GitHubReleaseAsset.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0595CADE1EF35CAB00F2561E /* GitHubReleaseAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 0595CADC1EF35CAB00F2561E /* GitHubReleaseAsset.m */; };
 		05ED064B1EF338B200C61AFA /* GitHubUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED064A1EF337D200C61AFA /* GitHubUpdater.m */; };
 		05ED064C1EF338B800C61AFA /* GitHubUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED06491EF337D200C61AFA /* GitHubUpdater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05ED064D1EF338B800C61AFA /* GitHubUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED06481EF337D200C61AFA /* GitHubUpdates.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		05ED06501EF33BB000C61AFA /* GitHubProgressWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED064E1EF33BB000C61AFA /* GitHubProgressWindowController.h */; };
+		05ED06501EF33BB000C61AFA /* GitHubProgressWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 05ED064E1EF33BB000C61AFA /* GitHubProgressWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05ED06511EF33BB000C61AFA /* GitHubProgressWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED064F1EF33BB000C61AFA /* GitHubProgressWindowController.m */; };
 		05ED06541EF33BD400C61AFA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ED06531EF33BCF00C61AFA /* Cocoa.framework */; };
 		05ED065A1EF33D8E00C61AFA /* GitHubProgressWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05ED06581EF33C7D00C61AFA /* GitHubProgressWindowController.xib */; };
-		05F1E5F71EF381C00045C4CD /* Pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F1E5F51EF381C00045C4CD /* Pair.h */; };
+		05F1E5F71EF381C00045C4CD /* Pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F1E5F51EF381C00045C4CD /* Pair.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05F1E5F81EF381C00045C4CD /* Pair.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F1E5F61EF381C00045C4CD /* Pair.m */; };
 		05F1E5FD1EF3A17A0045C4CD /* GitHubTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 05F1E5FA1EF3A06D0045C4CD /* GitHubTemplate.pdf */; };
 /* End PBXBuildFile section */

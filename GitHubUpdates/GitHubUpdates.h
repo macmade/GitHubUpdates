@@ -28,3 +28,8 @@
  */
 
 #import <GitHubUpdates/GitHubUpdater.h>
+#import <GitHubUpdates/GitHubRelease.h>
+#import <GitHubUpdates/GitHubReleaseAsset.h>
+#import <GitHubUpdates/GitHubProgressWindowController.h>
+#import <GitHubUpdates/GitHubInstallWindowController.h>
+#import <GitHubUpdates/Pair.h>

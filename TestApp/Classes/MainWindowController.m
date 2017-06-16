@@ -28,6 +28,7 @@
  */
 
 #import "MainWindowController.h"
+#import <GitHubUpdates/GitHubUpdates.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
