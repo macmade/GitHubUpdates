@@ -422,7 +422,9 @@ NS_ASSUME_NONNULL_END
     GitHubRelease                                 * bestRelease;
     GitHubReleaseAsset                            * bestAsset;
     Pair< GitHubRelease *, GitHubReleaseAsset * > * pair;
+    id< GitHubUpdaterDelegate >                     delegate;
     
+    delegate       = self.delegate;
     asset          = nil;
     currentVersion = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ];
     
@@ -446,6 +448,30 @@ NS_ASSUME_NONNULL_END
         if( bestAsset != nil && ( [ release.tagName compare: bestRelease.tagName options: NSNumericSearch ] != NSOrderedDescending ) )
         {
             continue;
+        }
+        
+        if( release.draft )
+        {
+            if
+            (
+                   [ delegate respondsToSelector: @selector( updaterShouldCheckForDrafts: ) ] == NO
+                || [ delegate updaterShouldCheckForDrafts: self ]                             == NO
+            )
+            {
+                continue;
+            }
+        }
+        
+        if( release.prerelease )
+        {
+            if
+            (
+                   [ delegate respondsToSelector: @selector( updaterShouldCheckForPrereleases: ) ] == NO
+                || [ delegate updaterShouldCheckForPrereleases: self ]                             == NO
+            )
+            {
+                continue;
+            }
         }
         
         for( asset in release.assets )

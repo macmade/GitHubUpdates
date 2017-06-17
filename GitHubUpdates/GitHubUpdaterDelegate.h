@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
+- ( BOOL )updaterShouldCheckForDrafts: ( GitHubUpdater * )updater;
+- ( BOOL )updaterShouldCheckForPrereleases: ( GitHubUpdater * )updater;
 - ( BOOL )updaterShouldCheckForUpdatesInBackground: ( GitHubUpdater * )updater;
 - ( Class )classForUpdaterProgressWindowController: ( GitHubUpdater * )updater;
 - ( Class )classForUpdaterInstallWindowController: ( GitHubUpdater * )updater;
