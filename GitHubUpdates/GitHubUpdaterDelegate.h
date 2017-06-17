@@ -23,14 +23,30 @@
  ******************************************************************************/
 
 /*!
- * @header      GitHubUpdates.h
+ * @header      GitHubUpdaterDelegate.h
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import <GitHubUpdates/GitHubUpdater.h>
-#import <GitHubUpdates/GitHubUpdaterDelegate.h>
-#import <GitHubUpdates/GitHubRelease.h>
-#import <GitHubUpdates/GitHubReleaseAsset.h>
-#import <GitHubUpdates/GitHubProgressWindowController.h>
-#import <GitHubUpdates/GitHubInstallWindowController.h>
+#import <Foundation/Foundation.h>
 
+@class GitHubUpdater;
+@class GitHubProgressWindowController;
+@class GitHubInstallWindowController;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol GitHubUpdaterDelegate< NSObject >
+
+@optional
+
+- ( BOOL )updaterShouldCheckForUpdatesInBackground: ( GitHubUpdater * )updater;
+- ( Class )classForUpdaterProgressWindowController: ( GitHubUpdater * )updater;
+- ( Class )classForUpdaterInstallWindowController: ( GitHubUpdater * )updater;
+- ( void )updater: ( GitHubUpdater * )updater willShowProgressWindowController: ( GitHubProgressWindowController * )controller;
+- ( void )updater: ( GitHubUpdater * )updater willShowInstallWindowController: ( GitHubInstallWindowController * )controller;
+- ( void )updater: ( GitHubUpdater * )updater didShowProgressWindowController: ( GitHubProgressWindowController * )controller;
+- ( void )updater: ( GitHubUpdater * )updater didShowInstallWindowController: ( GitHubInstallWindowController * )controller;
+
+@end
+
+NS_ASSUME_NONNULL_END

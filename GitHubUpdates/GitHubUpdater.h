@@ -28,13 +28,15 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <GitHubUpdates/GitHubUpdaterDelegate.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GitHubUpdater: NSObject
 
-@property( atomic, readwrite, strong ) IBInspectable NSString * user;
-@property( atomic, readwrite, strong ) IBInspectable NSString * repository;
+@property( atomic, readwrite, strong ) IBInspectable NSString                  * user;
+@property( atomic, readwrite, strong ) IBInspectable NSString                  * repository;
+@property( atomic, readwrite, weak   )               id< GitHubUpdaterDelegate > delegate;
 
 @property( atomic, readonly ) BOOL checkingForUpdates;
 @property( atomic, readonly ) BOOL installingUpdate;

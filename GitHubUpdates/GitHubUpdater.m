@@ -80,7 +80,18 @@ NS_ASSUME_NONNULL_END
 
 - ( void )checkForUpdatesInBackground;
 {
-    [ self checkForUpdatesInBackgroundWithDisplayOptions: 0 ];
+    id< GitHubUpdaterDelegate > delegate;
+    
+    delegate = self.delegate;
+    
+    if
+    (
+           [ delegate respondsToSelector: @selector( updaterShouldCheckForUpdatesInBackground: ) ] == NO
+        || [ delegate updaterShouldCheckForUpdatesInBackground: self ]                             == YES
+    )
+    {
+        [ self checkForUpdatesInBackgroundWithDisplayOptions: 0 ];
+    }
 }
 
 - ( IBAction )checkForUpdates: ( nullable id )sender
@@ -173,9 +184,28 @@ NS_ASSUME_NONNULL_END
                     
                     display = ^( void )
                     {
+                        id< GitHubUpdaterDelegate > delegate;
+                        Class                       cls;
+                        
                         if( self.progressWindowController == nil )
                         {
-                            self.progressWindowController = [ GitHubProgressWindowController new ];
+                            delegate = self.delegate;
+                            cls      = [ GitHubProgressWindowController class ];
+                            
+                            if( [ delegate respondsToSelector: @selector( classForUpdaterProgressWindowController: ) ] )
+                            {
+                                cls = [ delegate classForUpdaterProgressWindowController: self ];
+                                
+                                if( [ cls isKindOfClass: [ GitHubProgressWindowController class ] ] == NO )
+                                {
+                                    @throw [ NSException exceptionWithName: @"com.xs-labs.GitHubUpdaterException"
+                                                         reason:            [ NSString stringWithFormat: @"Class %@ should inherit from %@", NSStringFromClass( cls ), [ GitHubProgressWindowController class ] ]
+                                                         userInfo:          nil
+                                    ];
+                                }
+                            }
+                            
+                            self.progressWindowController = [ cls new ];
                         }
                         
                         self.progressWindowController.title         = NSLocalizedString( @"Checking for Updates", @"" );
@@ -185,8 +215,18 @@ NS_ASSUME_NONNULL_END
                         self.progressWindowController.progressMin   = 0.0;
                         self.progressWindowController.progressMax   = 0.0;
                         
+                        if( [ delegate respondsToSelector: @selector( updater:willShowProgressWindowController: ) ] )
+                        {
+                            [ delegate updater: self willShowProgressWindowController: self.progressWindowController ];
+                        }
+                        
                         [ self.progressWindowController showWindow: nil ];
                         [ self.progressWindowController.window center ];
+                        
+                        if( [ delegate respondsToSelector: @selector( updater:didShowProgressWindowController: ) ] )
+                        {
+                            [ delegate updater: self didShowProgressWindowController: self.progressWindowController ];
+                        }
                     };
                     
                     if( [ NSThread isMainThread ] )
@@ -402,12 +442,42 @@ NS_ASSUME_NONNULL_END
         dispatch_get_main_queue(),
         ^( void )
         {
-            self.installWindowController = [ [ GitHubInstallWindowController alloc ] initWithAsset: asset release: release ];
+            id< GitHubUpdaterDelegate > delegate;
+            Class                       cls;
+            
+            delegate = self.delegate;
+            cls      = [ GitHubInstallWindowController class ];
+            
+            if( [ delegate respondsToSelector: @selector( classForUpdaterInstallWindowController: ) ] )
+            {
+                cls = [ delegate classForUpdaterInstallWindowController: self ];
+                
+                if( [ cls isKindOfClass: [ GitHubInstallWindowController class ] ] == NO )
+                {
+                    @throw [ NSException exceptionWithName: @"com.xs-labs.GitHubUpdaterException"
+                                         reason:            [ NSString stringWithFormat: @"Class %@ should inherit from %@", NSStringFromClass( cls ), [ GitHubInstallWindowController class ] ]
+                                         userInfo:          nil
+                    ];
+                }
+            }
+            
+            self.installWindowController = [ [ cls alloc ] initWithAsset: asset release: release ];
             
             [ self bind: NSStringFromSelector( @selector( installingUpdate ) ) toObject: self.installWindowController withKeyPath: NSStringFromSelector( @selector( installingUpdate ) ) options: nil ];
+            
+            if( [ delegate respondsToSelector: @selector( updater:willShowInstallWindowController: ) ] )
+            {
+                [ delegate updater: self willShowInstallWindowController: self.installWindowController ];
+            }
+            
             [ self.installWindowController showWindow: nil ];
             [ self.installWindowController.window center ];
             [ [ NSNotificationCenter defaultCenter ] addObserver: self selector: @selector( installWindowWillClose: ) name: NSWindowWillCloseNotification object: self.installWindowController.window ];
+            
+            if( [ delegate respondsToSelector: @selector( updater:didShowInstallWindowController: ) ] )
+            {
+                [ delegate updater: self didShowInstallWindowController: self.installWindowController ];
+            }
         }
     );
 }

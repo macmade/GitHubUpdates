@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051B60AC1EF559E100EE49CF /* GitHubUpdaterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		052C708F1EF370BB000B8D06 /* GitHubInstallWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */; };
 		052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubUpdaterDelegate.h; sourceTree = "<group>"; };
 		052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubInstallWindowController.h; sourceTree = "<group>"; };
 		052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubInstallWindowController.m; sourceTree = "<group>"; };
 		052C70911EF370E1000B8D06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubInstallWindowController.xib; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				0595CADC1EF35CAB00F2561E /* GitHubReleaseAsset.m */,
 				05ED06491EF337D200C61AFA /* GitHubUpdater.h */,
 				05ED064A1EF337D200C61AFA /* GitHubUpdater.m */,
+				051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */,
 				05ED06481EF337D200C61AFA /* GitHubUpdates.h */,
 				05751AA01EF40CC400680B34 /* NSAttributedString+GitHubUpdates.h */,
 				05751AA11EF40CC400680B34 /* NSAttributedString+GitHubUpdates.m */,
@@ -226,6 +229,7 @@
 				05B6BAD51EF3C7CA00842E6D /* NSString+GitHubUpdates.h in Headers */,
 				052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */,
 				0595CAD91EF3586A00F2561E /* GitHubRelease.h in Headers */,
+				051B60AC1EF559E100EE49CF /* GitHubUpdaterDelegate.h in Headers */,
 				0555EB9A1EF3D3810016167F /* NSBundle+GitHubUpdates.h in Headers */,
 				05751AA31EF40CFE00680B34 /* NSAttributedString+GitHubUpdates.h in Headers */,
 				05ED064C1EF338B800C61AFA /* GitHubUpdater.h in Headers */,
