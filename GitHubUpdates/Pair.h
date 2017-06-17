@@ -31,11 +31,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @class       Pair
+ * @abstract    Represents an object pair.
+ */
 @interface Pair< __covariant FirstType, __covariant SecondType >: NSObject
 
-@property( atomic, readwrite, strong, nullable ) FirstType  first;
+/*!
+ * @property    first
+ * @abstract    The first object in the pair.
+ */
+@property( atomic, readwrite, strong, nullable ) FirstType first;
+
+/*!
+ * @property    second
+ * @abstract    The second object in the pair.
+ */
 @property( atomic, readwrite, strong, nullable ) SecondType second;
 
+/*!
+ * @method      initWithFirstValue:secondValue:
+ * @abstract    Initialized an instance of this class.
+ * @discussion  This is the class's designated initializer.
+ * @result      The initialized instance
+ * @param       v1  The first object
+ * @param       v2  The second object
+ */
 - ( instancetype )initWithFirstValue: ( nullable FirstType )v1 secondValue: ( nullable SecondType )v2 NS_DESIGNATED_INITIALIZER;
 
 @end

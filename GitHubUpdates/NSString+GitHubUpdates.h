@@ -31,8 +31,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @category    NSString( GitHubUpdates )
+ * @abstract    Additional methods for NSString.
+ */
 @interface NSString( GitHubUpdates )
 
+/*!
+ * @method      stringForSizeInBytes:
+ * @abstract    Formats a size in bytes to a human representation.
+ * @param       bytes   The size in bytes
+ * @result      A string representing the size
+ */
 + ( NSString * )stringForSizeInBytes: ( NSUInteger )bytes;
 
 @end

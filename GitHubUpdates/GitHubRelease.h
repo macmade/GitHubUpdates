@@ -111,6 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @method      releasesWithData:error:
  * @abstract    Gets an array of releases from JSON data.
+ * @result      The initialized instance
  * @param       data    The JSON data
  * @param       error   An optional pointer to an error object
  */

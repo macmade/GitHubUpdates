@@ -69,6 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              designated initializer.
  * @param       asset   The proposed asset
  * @param       release The proposed release
+ * @result      The initialized instance
  * @see         GitHubReleaseAsset
  * @see         GitHubRelease
  */
