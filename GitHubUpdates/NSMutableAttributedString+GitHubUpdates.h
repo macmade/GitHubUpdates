@@ -35,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @category    NSMutableAttributedString( GitHubUpdates )
  * @abstract    Additional methods for NSMutableAttributedString.
  */
-
 @interface NSMutableAttributedString( GitHubUpdates )
 
 /*!
