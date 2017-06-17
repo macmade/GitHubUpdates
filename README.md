@@ -73,9 +73,8 @@ Tags can be created on GitHub the following way:
     git tag 0.1.2 -m "0.1.2"
     git push origin --tags
 
-Once you created a new tag, you'll need to upload a ZIP archive of your application to GitHub.  
-There's currently no support for other archive formats, or for DMG files.  
-Also note that your application should be at the first level of the ZIP archive.
+Once you created a new tag, you'll need to upload a ZIP archive or a DMG file of your application to GitHub.  
+Also note that your application should be at the first level of the ZIP archive or the DMG file.
 
 Note that the installer will check the value of `CFBundleIdentifier`, so they need to match.
 
