@@ -40,16 +40,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GitHubInstallWindowController() < NSURLSessionDownloadDelegate >
 
-@property( atomic, readwrite, strong, nullable )          GitHubReleaseAsset             * asset;
-@property( atomic, readwrite, strong, nullable )          GitHubRelease                  * githubRelease;
-@property( atomic, readwrite, strong, nullable )          GitHubProgressWindowController * progressWindowController;
-@property( atomic, readwrite, strong, nullable )          NSString                       * title;
-@property( atomic, readwrite, strong, nullable )          NSString                       * message;
-@property( atomic, readwrite, strong, nullable )          NSAttributedString             * releaseNotes;
-@property( atomic, readwrite, assign           )          BOOL                             installingUpdate;
-@property( atomic, readwrite, assign           )          BOOL                             canceled;
-@property( atomic, readwrite, strong           )          dispatch_queue_t                 queue;
-@property( atomic, readwrite, strong, nullable ) IBOutlet NSTextView                     * textView;
+@property( atomic, readwrite, strong, nullable )          GitHubReleaseAsset                   * asset;
+@property( atomic, readwrite, strong, nullable )          GitHubRelease                        * githubRelease;
+@property( atomic, readwrite, strong, nullable )          GitHubProgressWindowController       * progressWindowController;
+@property( atomic, readwrite, strong, nullable )          NSString                             * title;
+@property( atomic, readwrite, strong, nullable )          NSString                             * message;
+@property( atomic, readwrite, strong, nullable )          NSAttributedString                   * releaseNotes;
+@property( atomic, readwrite, assign           )          BOOL                                   installingUpdate;
+@property( atomic, readwrite, assign           )          BOOL                                   canceled;
+@property( atomic, readwrite, strong           )          dispatch_queue_t                       queue;
+@property( atomic, readwrite, strong           )          NSMutableArray< void ( ^ )( void ) > * cleanup;
+@property( atomic, readwrite, strong, nullable ) IBOutlet NSTextView                           * textView;
 
 - ( IBAction )install: ( nullable id )sender;
 - ( IBAction )cancel: ( nullable id )sender;
@@ -59,13 +60,18 @@ NS_ASSUME_NONNULL_BEGIN
 - ( void )displayError: ( NSError * )error;
 - ( void )download;
 - ( void )stoppedInstalling;
+- ( void )stoppedInstalling: ( BOOL )showWindow;
 - ( void )installFromZIP: ( NSURL * )location;
+- ( void )installFromDMG: ( NSURL * )location;
+- ( void )installFromDirectory: ( NSURL * )location;
 - ( NSString * )temporaryFilePath;
 - ( nullable NSURL * )createTemporaryDirectory;
 - ( BOOL )unzipFile: ( NSURL * )file toDirectory: ( NSURL * )directory;
+- ( nullable NSURL * )mountDMG: ( NSURL * )file;
 - ( nullable NSURL * )findAppInDirectory: ( NSURL * )directory;
 - ( BOOL )checkCodeSigning: ( NSURL * )app;
 - ( BOOL )replaceApp: ( NSURL * )app;
+- ( void )removeQuarantine: ( NSURL * )url;
 
 @end
 
@@ -93,7 +99,8 @@ NS_ASSUME_NONNULL_END
 {
     if( ( self = [ super initWithWindow: window ] ) )
     {
-        self.queue = dispatch_queue_create( "com.xs-labs.GitHubInstallWindowController", DISPATCH_QUEUE_SERIAL );
+        self.queue   = dispatch_queue_create( "com.xs-labs.GitHubInstallWindowController", DISPATCH_QUEUE_SERIAL );
+        self.cleanup = [ NSMutableArray new ];
     }
     
     return self;
@@ -103,7 +110,8 @@ NS_ASSUME_NONNULL_END
 {
     if( ( self = [ super initWithCoder: coder ] ) )
     {
-        self.queue = dispatch_queue_create( "com.xs-labs.GitHubInstallWindowController", DISPATCH_QUEUE_SERIAL );
+        self.queue   = dispatch_queue_create( "com.xs-labs.GitHubInstallWindowController", DISPATCH_QUEUE_SERIAL );
+        self.cleanup = [ NSMutableArray new ];
     }
     
     return self;
@@ -263,111 +271,232 @@ NS_ASSUME_NONNULL_END
 
 - ( void )stoppedInstalling
 {
+    [ self stoppedInstalling: YES ];
+}
+
+- ( void )stoppedInstalling: ( BOOL )showWindow
+{
+    void ( ^ cleanup )( void );
+    
     [ self.progressWindowController.window close ];
     [ NSApp stopModal ];
     
-    self.window.isVisible         = YES;
+    if( showWindow )
+    {
+        self.window.isVisible = YES;
+    }
+    
     self.progressWindowController = nil;
     self.installingUpdate         = NO;
+    
+    for( cleanup in self.cleanup )
+    {
+        cleanup();
+    }
+    
+    [ self.cleanup removeAllObjects ];
 }
 
 - ( void )installFromZIP: ( NSURL * )location
 {
-    ( void )location;
-    
-    self.progressWindowController.indeterminate = YES;
-    self.progressWindowController.progress      = 0.0;
-    self.progressWindowController.progressMax   = 0.0;
-    self.progressWindowController.message       = NSLocalizedString( @"Expanding archive...", @"" );
-    
-    if( [ [ NSFileManager defaultManager ] fileExistsAtPath: location.path isDirectory: nil ] == NO )
-    {
-        [ self stoppedInstalling ];
-        [ self displayErrorWithMessage: NSLocalizedString( @"Cannot find the downloaded file.", @"" ) ];
-        
-        return;
-    }
-    
     dispatch_async
     (
-        self.queue,
+        dispatch_get_main_queue(),
         ^( void )
         {
-            BOOL    success;
-            NSURL * tempURL;
-            NSURL * appURL;
+            self.progressWindowController.indeterminate = YES;
+            self.progressWindowController.progress      = 0.0;
+            self.progressWindowController.progressMax   = 0.0;
+            self.progressWindowController.message       = NSLocalizedString( @"Expanding ZIP archive...", @"" );
             
-            success = NO;
-            
-            if( ( tempURL = [ self createTemporaryDirectory ] ) == nil )
+            if( [ [ NSFileManager defaultManager ] fileExistsAtPath: location.path isDirectory: nil ] == NO )
             {
-                goto end;
+                [ self stoppedInstalling ];
+                [ self displayErrorWithMessage: NSLocalizedString( @"Cannot find the downloaded file.", @"" ) ];
+                
+                return;
             }
-            
-            if( [ self unzipFile: location toDirectory: tempURL ] == NO )
-            {
-                goto end;
-            }
-            
-            if( ( appURL = [ self findAppInDirectory: tempURL ] ) == nil )
-            {
-                goto end;
-            }
-            
-            if( [ self checkCodeSigning: appURL ] == NO )
-            {
-                goto end;
-            }
-            
-            if( [ self replaceApp: appURL ] == NO )
-            {
-                goto end;
-            }
-            
-            success = YES;
-            
-            end:
             
             dispatch_async
             (
-                dispatch_get_main_queue(),
+                self.queue,
                 ^( void )
                 {
-                    NSAlert  * alert;
-                    NSTask   * task;
-                    NSString * path;
+                    NSURL * tempURL;
                     
-                    [ self stoppedInstalling ];
-                    [ self.window close ];
-                    
-                    if( success )
+                    if( ( tempURL = [ self createTemporaryDirectory ] ) == nil )
                     {
-                        alert                 = [ NSAlert new ];
-                        alert.messageText     = NSLocalizedString( @"Installation Successfull", @"" );
-                        alert.informativeText = NSLocalizedString( @"The application will now be restarted.", @"" );
-                        
-                        [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
-                        [ alert runModal ];
-                        
-                        path            = [ NSBundle bundleForClass: [ self class ] ].bundlePath;
-                        path            = [ path stringByAppendingPathComponent: @"Versions" ];
-                        path            = [ path stringByAppendingPathComponent: @"A" ];
-                        path            = [ path stringByAppendingPathComponent: @"Relauncher" ];
-                        task            = [ NSTask new ];
-                        task.launchPath = path;
-                        task.arguments  = @[ [ NSBundle mainBundle ].bundlePath ];
-                        
-                        @try
-                        {
-                            [ task launch ];
-                        }
-                        @catch( NSException * e )
-                        {
-                            ( void )e;
-                        }
-                        
-                        [ NSApp terminate: nil ];
+                        goto error;
                     }
+                    
+                    if( [ self unzipFile: location toDirectory: tempURL ] == NO )
+                    {
+                        goto error;
+                    }
+                    
+                    [ self installFromDirectory: tempURL ];
+                    
+                    error:
+                    
+                    dispatch_async
+                    (
+                        dispatch_get_main_queue(),
+                        ^( void )
+                        {
+                            [ self stoppedInstalling ];
+                            [ self.window close ];
+                        }
+                    );
+                }
+            );
+        }
+    );
+}
+
+- ( void )installFromDMG: ( NSURL * )location
+{
+    dispatch_async
+    (
+        dispatch_get_main_queue(),
+        ^( void )
+        {
+            self.progressWindowController.indeterminate = YES;
+            self.progressWindowController.progress      = 0.0;
+            self.progressWindowController.progressMax   = 0.0;
+            self.progressWindowController.message       = NSLocalizedString( @"Mounting DMG file...", @"" );
+            
+            if( [ [ NSFileManager defaultManager ] fileExistsAtPath: location.path isDirectory: nil ] == NO )
+            {
+                [ self stoppedInstalling ];
+                [ self displayErrorWithMessage: NSLocalizedString( @"Cannot find the downloaded file.", @"" ) ];
+                
+                return;
+            }
+            
+            dispatch_async
+            (
+                self.queue,
+                ^( void )
+                {
+                    NSURL * volumeURL;
+                    
+                    if( ( volumeURL = [ self mountDMG: location ] ) == nil )
+                    {
+                        dispatch_async
+                        (
+                            dispatch_get_main_queue(),
+                            ^( void )
+                            {
+                                [ self stoppedInstalling ];
+                                [ self.window close ];
+                            }
+                        );
+                        
+                        return;
+                    }
+                    
+                    [ self installFromDirectory: volumeURL ];
+                }
+            );
+        }
+    );
+}
+
+- ( void )installFromDirectory: ( NSURL * )location
+{
+    dispatch_async
+    (
+        dispatch_get_main_queue(),
+        ^( void )
+        {
+            BOOL isDir;
+            
+            self.progressWindowController.indeterminate = YES;
+            self.progressWindowController.progress      = 0.0;
+            self.progressWindowController.progressMax   = 0.0;
+            self.progressWindowController.message       = NSLocalizedString( @"Installing...", @"" );
+            
+            if( [ [ NSFileManager defaultManager ] fileExistsAtPath: location.path isDirectory: &isDir ] == NO || isDir == NO )
+            {
+                [ self stoppedInstalling ];
+                [ self displayErrorWithMessage: NSLocalizedString( @"Cannot find the downloaded file.", @"" ) ];
+                
+                return;
+            }
+            
+            dispatch_async
+            (
+                self.queue,
+                ^( void )
+                {
+                    BOOL    success;
+                    NSURL * appURL;
+                    
+                    success = NO;
+                    
+                    if( ( appURL = [ self findAppInDirectory: location ] ) == nil )
+                    {
+                        goto end;
+                    }
+                    
+                    if( [ self checkCodeSigning: appURL ] == NO )
+                    {
+                        goto end;
+                    }
+                    
+                    if( [ self replaceApp: appURL ] == NO )
+                    {
+                        goto end;
+                    }
+                    
+                    [ self removeQuarantine: [ NSBundle mainBundle ].bundleURL ];
+                    
+                    success = YES;
+                    
+                    end:
+                    
+                    dispatch_async
+                    (
+                        dispatch_get_main_queue(),
+                        ^( void )
+                        {
+                            NSAlert  * alert;
+                            NSTask   * task;
+                            NSString * path;
+                            
+                            [ self stoppedInstalling: NO ];
+                            [ self.window close ];
+                            
+                            if( success )
+                            {
+                                alert                 = [ NSAlert new ];
+                                alert.messageText     = NSLocalizedString( @"Installation Successfull", @"" );
+                                alert.informativeText = NSLocalizedString( @"The application will now be restarted.", @"" );
+                                
+                                [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
+                                [ alert runModal ];
+                                
+                                path            = [ NSBundle bundleForClass: [ self class ] ].bundlePath;
+                                path            = [ path stringByAppendingPathComponent: @"Versions" ];
+                                path            = [ path stringByAppendingPathComponent: @"A" ];
+                                path            = [ path stringByAppendingPathComponent: @"Relauncher" ];
+                                task            = [ NSTask new ];
+                                task.launchPath = path;
+                                task.arguments  = @[ [ NSBundle mainBundle ].bundlePath ];
+                                
+                                @try
+                                {
+                                    [ task launch ];
+                                }
+                                @catch( NSException * e )
+                                {
+                                    ( void )e;
+                                }
+                                
+                                [ NSApp terminate: nil ];
+                            }
+                        }
+                    );
                 }
             );
         }
@@ -432,6 +561,105 @@ NS_ASSUME_NONNULL_END
     }
     
     return YES;
+}
+
+- ( nullable NSURL * )mountDMG: ( NSURL * )file
+{
+    NSTask       * task;
+    NSPipe       * pipe;
+    NSData       * data;
+    NSDictionary * plist;
+    NSArray      * entities;
+    NSDictionary * entity;
+    NSString     * path;
+    NSURL        * url;
+    
+    pipe                = [ NSPipe pipe ];
+    task                = [ NSTask new ];
+    task.launchPath     = @"/usr/bin/hdiutil";
+    task.arguments      = @[ @"attach", @"-plist", file.path ];
+    task.standardOutput = pipe;
+    
+    @try
+    {
+        [ task launch ];
+        [ task waitUntilExit ];
+    }
+    @catch( NSException * e )
+    {
+        [ self displayError: [ NSError errorWithException: e ] ];
+        
+        return nil;
+    }
+    
+    if( task.terminationStatus != 0 )
+    {
+        [ self displayErrorWithMessage: NSLocalizedString( @"Error mounting the DMG file.", @"" ) ];
+        
+        return nil;
+    }
+    
+    data = [ pipe.fileHandleForReading readDataToEndOfFile ];
+    url  = nil;
+    
+    if( data )
+    {
+        plist = [ NSPropertyListSerialization propertyListWithData: data options: NSPropertyListImmutable format: NULL error: NULL ];
+        
+        if( [ plist isKindOfClass: [ NSDictionary class ] ] )
+        {
+            entities = plist[ @"system-entities" ];
+            
+            if( [ entities isKindOfClass: [ NSArray class ] ] )
+            {
+                for( entity in entities )
+                {
+                    if( [ entity isKindOfClass: [ NSDictionary class ] ] == NO )
+                    {
+                        continue;
+                    }
+                    
+                    path = entity[ @"mount-point" ];
+                    
+                    if( [ path isKindOfClass: [ NSString class ] ] )
+                    {
+                        url = [ NSURL fileURLWithPath: path ];
+                        
+                        [ self.cleanup addObject: ^( void )
+                            {
+                                NSTask * detach;
+                                
+                                detach            = [ NSTask new ];
+                                detach.launchPath = @"/usr/bin/hdiutil";
+                                detach.arguments  = @[ @"detach", path ];
+                                
+                                @try
+                                {
+                                    [ detach launch ];
+                                    [ detach waitUntilExit ];
+                                }
+                                @catch( NSException * e )
+                                {
+                                    ( void )e;
+                                }
+                            }
+                        ];
+                        
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    if( url == nil )
+    {
+        [ self displayErrorWithMessage: NSLocalizedString( @"Error mounting the DMG file.", @"" ) ];
+        
+        return nil;
+    }
+    
+    return url;
 }
 
 - ( nullable NSURL * )findAppInDirectory: ( NSURL * )directory
@@ -551,6 +779,7 @@ NS_ASSUME_NONNULL_END
 {
     NSError * error;
     NSURL   * trashURL;
+    BOOL      replaced;
     
     if( [ [ NSFileManager defaultManager ] trashItemAtURL: [ NSBundle mainBundle ].bundleURL resultingItemURL: &trashURL error: &error ] == NO )
     {
@@ -559,21 +788,49 @@ NS_ASSUME_NONNULL_END
         return NO;
     }
     
-    if( [ [ NSFileManager defaultManager ] moveItemAtURL: app toURL: [ NSBundle mainBundle ].bundleURL error: &error ] == NO )
+    if( [ [ NSFileManager defaultManager ] isWritableFileAtPath: app.path ] )
+    {
+        replaced = [ [ NSFileManager defaultManager ] moveItemAtURL: app toURL: [ NSBundle mainBundle ].bundleURL error: &error ];
+    }
+    else
+    {
+        replaced = [ [ NSFileManager defaultManager ] copyItemAtURL: app toURL: [ NSBundle mainBundle ].bundleURL error: &error ];
+    }
+    
+    if( replaced == NO )
     {
         if( [ [ NSFileManager defaultManager ] moveItemAtURL: trashURL toURL: [ NSBundle mainBundle ].bundleURL error: &error ] == NO )
         {
-            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the new application.", @"" ) ];
+            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the new application. Original application is in your Trash", @"" ) ];
         }
         else
         {
-            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the new application. Original application is in your Trash", @"" ) ];
+            [ self displayErrorWithMessage: NSLocalizedString( @"Cannot move the new application.", @"" ) ];
         }
         
         return NO;
     }
     
     return YES;
+}
+
+- ( void )removeQuarantine: ( NSURL * )url
+{
+    NSTask * task;
+    
+    task            = [ NSTask new ];
+    task.launchPath = @"/usr/bin/xattr";
+    task.arguments  = @[ @"-d", @"com.apple.quarantine", url.path ];
+    
+    @try
+    {
+        [ task launch ];
+        [ task waitUntilExit ];
+    }
+    @catch( NSException * e )
+    {
+        ( void )e;
+    }
 }
 
 #pragma mark - NSURLSessionDownloadDelegate
@@ -636,7 +893,19 @@ NS_ASSUME_NONNULL_END
         return;
     }
     
-    [ self installFromZIP: url ];
+    if( [ self.asset.contentType isEqualToString: @"application/zip" ] )
+    {
+        [ self installFromZIP: url ];
+    }
+    else if( [ self.asset.contentType isEqualToString: @"application/x-diskcopy" ] )
+    {
+        [ self installFromDMG: url ];
+    }
+    else
+    {
+        [ self stoppedInstalling ];
+        [ self displayErrorWithMessage: [ NSString stringWithFormat: NSLocalizedString( @"Unspoorted content type: %@.", @"" ), self.asset.contentType ] ];
+    }
 }
 
 @end

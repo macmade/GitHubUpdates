@@ -378,7 +378,7 @@ NS_ASSUME_NONNULL_END
                 continue;
             }
             
-            if( [ asset.contentType isEqualToString: @"application/zip" ] == NO )
+            if( [ asset.contentType isEqualToString: @"application/x-diskcopy" ] == NO && [ asset.contentType isEqualToString: @"application/zip" ] == NO )
             {
                 continue;
             }
