@@ -19,6 +19,11 @@ If you ever used [Sparkle](https://github.com/sparkle-project/Sparkle), this pro
 
 ![Update](Assets/Update.png "Update")
 
+Documentation
+-------------
+
+Documentation and API reference can be found at: http://doc.xs-labs.com/GitHubUpdates/
+
 How to use
 ----------
 
