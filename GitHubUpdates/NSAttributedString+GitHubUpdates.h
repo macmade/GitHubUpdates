@@ -31,8 +31,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @category    NSAttributedString( GitHubUpdates )
+ * @abstract    Additional methods for NSAttributedString.
+ */
 @interface NSAttributedString( GitHubUpdates )
 
+/*!
+ * @method      attributedStringFromMarkdownString:
+ * @abstract    Returns an attributed string from a Markdown string
+ * @param       md  The Markdown string
+ * @result      An attributed string
+ */
 + ( NSAttributedString * )attributedStringFromMarkdownString: ( NSString * )md;
 
 @end

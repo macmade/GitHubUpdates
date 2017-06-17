@@ -31,8 +31,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @category    NSError( GitHubUpdates )
+ * @abstract    Additional methods for NSError.
+ */
 @interface NSError( GitHubUpdates )
 
+/*!
+ * @method      errorWithException:
+ * @abstract    Creates an error object from an exception object.
+ * @param       exception   The exception object
+ * @result      The error object
+ */
 + ( instancetype )errorWithException: ( NSException * )exception;
 
 @end

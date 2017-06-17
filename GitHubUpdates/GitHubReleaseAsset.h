@@ -33,16 +33,62 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @class       GitHubRelease 
+ * @abstract    Represents a GitHub release's asset.
+ */
 @interface GitHubReleaseAsset: NSObject
 
-@property( atomic, readonly, strong, nullable ) NSURL         * url;
-@property( atomic, readonly, strong, nullable ) NSURL         * downloadURL;
-@property( atomic, readonly, strong, nullable ) NSString      * name;
-@property( atomic, readonly, strong, nullable ) NSString      * contentType;
-@property( atomic, readonly, strong, nullable ) NSDate        * created;
-@property( atomic, readonly, strong, nullable ) NSDate        * updated;
-@property( atomic, readonly                   ) NSUInteger      size;
+/*!
+ * @property    url
+ * @abstract    The asset's URL.
+ * @discussion  This URL corresponds to the asset API feed URL.
+ * @see         downloadURL
+ */
+@property( atomic, readonly, strong, nullable ) NSURL * url;
 
+/*!
+ * @property    downloadURL
+ * @abstract    The asset's download URL.
+ */
+@property( atomic, readonly, strong, nullable ) NSURL * downloadURL;
+
+/*!
+ * @property    name
+ * @abstract    The asset's name.
+ */
+@property( atomic, readonly, strong, nullable ) NSString * name;
+
+/*!
+ * @property    contentType
+ * @abstract    The asset's content type.
+ */
+@property( atomic, readonly, strong, nullable ) NSString * contentType;
+
+/*!
+ * @property    created
+ * @abstract    The asset's creation date.
+ */
+@property( atomic, readonly, strong, nullable ) NSDate * created;
+
+/*!
+ * @property    updated
+ * @abstract    The asset's update date, if any.
+ */
+@property( atomic, readonly, strong, nullable ) NSDate * updated;
+
+/*!
+ * @property    size
+ * @abstract    The asset's size.
+ */
+@property( atomic, readonly ) NSUInteger size;
+
+/*!
+ * @method      initWithDictionary:
+ * @abstract    Initializes an instance with properties from a dictionary.
+ * @param       dict    The dictionary containing the asset's properties
+ * @result      The initialized instance, or nil
+ */
 - ( nullable instancetype )initWithDictionary: ( NSDictionary * )dict;
 
 @end

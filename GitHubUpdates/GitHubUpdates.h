@@ -25,6 +25,7 @@
 /*!
  * @header      GitHubUpdates.h
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @abstract    Umbrella header for the GitHubUpdates framework/module.
  */
 
 #import <GitHubUpdates/GitHubUpdater.h>
@@ -33,4 +34,3 @@
 #import <GitHubUpdates/GitHubReleaseAsset.h>
 #import <GitHubUpdates/GitHubProgressWindowController.h>
 #import <GitHubUpdates/GitHubInstallWindowController.h>
-

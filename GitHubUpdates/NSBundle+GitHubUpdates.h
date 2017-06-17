@@ -31,9 +31,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @category    NSBundle( GitHubUpdates )
+ * @abstract    Additional methods for NSBundle.
+ */
 @interface NSBundle( GitHubUpdates )
 
-@property( nonatomic, readonly           ) BOOL       isCodeSigned;
+/*!
+ * @property    isCodeSigned
+ * @abstract    Checks if the bundle is code-signed.
+ * @discussion  This will invoke the `codesign` utility.
+ */
+@property( nonatomic, readonly ) BOOL isCodeSigned;
+
+/*!
+ * @property    codeSigningIdentity
+ * @abstract    Returns the identity used to code-sign the bundle, if any.
+ * @discussion  This will invoke the `codesign` utility.
+ */
 @property( nonatomic, readonly, nullable ) NSString * codeSigningIdentity;
 
 @end

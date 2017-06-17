@@ -31,9 +31,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @category    NSMutableAttributedString( GitHubUpdates )
+ * @abstract    Additional methods for NSMutableAttributedString.
+ */
+
 @interface NSMutableAttributedString( GitHubUpdates )
 
+/*!
+ * @method      processMarker:attributes:
+ * @abstract    Processes a marker, adding attributes if found.
+ * @param       marker      The marker to process
+ * @param       attributes  The attributes to use if the marker is found
+ */
 - ( void )processMarker: ( NSString * )marker attributes: ( NSDictionary * )attributes;
+
+/*!
+ * @method      processLineStart:attributes:
+ * @abstract    Processes a line start marker, adding attributes if found.
+ * @param       lineStart   The line start marker
+ * @param       attributes  The attributes to use if the line start marker is found
+ */
 - ( void )processLineStart: ( NSString * )lineStart attributes: ( NSDictionary * )attributes;
 
 @end
