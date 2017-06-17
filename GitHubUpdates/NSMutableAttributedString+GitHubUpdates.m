@@ -91,7 +91,7 @@
         }
         
         [ self setAttributes: attributes range: NSMakeRange( r1.location, r2.location - r1.location ) ];
-        [ self deleteCharactersInRange: NSMakeRange( r1.location, lineStart.length - 1 ) ];
+        [ self deleteCharactersInRange: NSMakeRange( r1.location + 1, lineStart.length - 1 ) ];
         
         start = r2.location + r2.length;
     }
