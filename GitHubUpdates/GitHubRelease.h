@@ -33,20 +33,87 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @class       GitHubRelease 
+ * @abstract    Represents a GitHub release.
+ */
 @interface GitHubRelease: NSObject
 
-@property( atomic, readonly, strong, nullable ) NSURL                           * url;
-@property( atomic, readonly, strong, nullable ) NSURL                           * htmlURL;
-@property( atomic, readonly, strong, nullable ) NSString                        * tagName;
-@property( atomic, readonly                   ) BOOL                              draft;
-@property( atomic, readonly                   ) BOOL                              prerelease;
-@property( atomic, readonly, strong, nullable ) NSDate                          * created;
-@property( atomic, readonly, strong, nullable ) NSDate                          * published;
-@property( atomic, readonly, strong, nullable ) NSURL                           * tarballURL;
-@property( atomic, readonly, strong, nullable ) NSURL                           * zipballURL;
-@property( atomic, readonly, strong, nullable ) NSString                        * body;
+/*!
+ * @property    url
+ * @abstract    The release URL.
+ * @discussion  This URL corresponds to the release API feed URL.
+ * @see         htmlURL
+ */
+@property( atomic, readonly, strong, nullable ) NSURL * url;
+
+/*!
+ * @property    htmlURL
+ * @abstract    The web URL for the release.
+ */
+@property( atomic, readonly, strong, nullable ) NSURL * htmlURL;
+
+/*!
+ * @property    tagName
+ * @abstract    The name of the release's tag.
+ */
+@property( atomic, readonly, strong, nullable ) NSString * tagName;
+
+/*!
+ * @property    draft
+ * @abstract    Whether this release is a draft.
+ */
+@property( atomic, readonly ) BOOL draft;
+
+/*!
+ * @property    draft
+ * @abstract    Whether this release is a prerelease.
+ */
+@property( atomic, readonly ) BOOL prerelease;
+
+/*!
+ * @property    created
+ * @abstract    The release's creation date.
+ */
+@property( atomic, readonly, strong, nullable ) NSDate * created;
+
+/*!
+ * @property    published
+ * @abstract    The release's publication date.
+ */
+@property( atomic, readonly, strong, nullable ) NSDate * published;
+
+/*!
+ * @property    tarballURL
+ * @abstract    The URL for the source code's TAR archive.
+ */
+@property( atomic, readonly, strong, nullable ) NSURL * tarballURL;
+
+/*!
+ * @property    zipballURL
+ * @abstract    The URL for the source code's ZIP archive.
+ */
+@property( atomic, readonly, strong, nullable ) NSURL * zipballURL;
+
+/*!
+ * @property    body
+ * @abstract    The release notes for the release.
+ */
+@property( atomic, readonly, strong, nullable ) NSString * body;
+
+/*!
+ * @property    assets
+ * @abstract    The assets contained in the release.
+ * @see         GitHubReleaseAsset
+ */
 @property( atomic, readonly, strong, nullable ) NSArray< GitHubReleaseAsset * > * assets;
 
+/*!
+ * @method      releasesWithData:error:
+ * @abstract    Gets an array of releases from JSON data.
+ * @param       data    The JSON data
+ * @param       error   An optional pointer to an error object
+ */
 + ( nullable NSArray< GitHubRelease * > * )releasesWithData: ( NSData * )data error: ( NSError * __autoreleasing * )error;
 
 @end

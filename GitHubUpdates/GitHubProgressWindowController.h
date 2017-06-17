@@ -31,14 +31,59 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @class       GitHubProgressWindowController
+ * @abstract    Window controller for the progress window.
+ * @discussion  This window controller is used for all progress activity,
+ *              checing for updates or installing an update.
+ */
 @interface GitHubProgressWindowController: NSWindowController
 
+/*!
+ * @property    title
+ * @abstract    The progress title message.
+ */
 @property( atomic, readwrite, strong, nullable ) NSString * title;
+
+/*!
+ * @property    message
+ * @abstract    The progress message.
+ */
 @property( atomic, readwrite, strong, nullable ) NSString * message;
-@property( atomic, readwrite, assign           ) BOOL       indeterminate;
-@property( atomic, readwrite, assign           ) double     progress;
-@property( atomic, readwrite, assign           ) double     progressMin;
-@property( atomic, readwrite, assign           ) double     progressMax;
+
+/*!
+ * @property    indeterminate
+ * @abstract    Whether the progress is indeterminate.
+ * @disucssion  This is used for the progress bar.
+ */
+@property( atomic, readwrite, assign ) BOOL indeterminate;
+
+/*!
+ * @property    progress
+ * @abstract    The current progress.
+ * @disucssion  This is used for the progress bar.
+ */
+@property( atomic, readwrite, assign ) double progress;
+
+/*!
+ * @property    progressMin
+ * @abstract    The progress minimum value
+ * @disucssion  This is used for the progress bar.
+ */
+@property( atomic, readwrite, assign ) double progressMin;
+
+/*!
+ * @property    progressMax
+ * @abstract    The progress maximum value
+ * @disucssion  This is used for the progress bar.
+ */
+@property( atomic, readwrite, assign ) double progressMax;
+
+/*!
+ * @property    cancel
+ * @abstract    A block invoked when the user presses the cancel button.
+ * @discussion  If nil, the cancel button will not be shown.
+ */
 @property( atomic, readwrite, strong, nullable ) void ( ^ cancel )( void );
 
 @end

@@ -34,11 +34,44 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ * @class       GitHubInstallWindowController
+ * @abstract    Window controller for the install window.
+ * @discussion  This window controller is used when an update is found, to
+ *              propose the user to install it.
+ */
 @interface GitHubInstallWindowController: NSWindowController
 
+/*!
+ * @property    asset
+ * @abstract    The asset proposed to be installed.
+ * @see         GitHubReleaseAsset
+ */
 @property( atomic, readonly, strong, nullable ) GitHubReleaseAsset * asset;
-@property( atomic, readonly                   ) BOOL                 installingUpdate;
 
+/*!
+ * @property    githubRelease
+ * @abstract    The release proposed to be installed .
+ * @see         GitHubRelease
+ */
+@property( atomic, readonly, strong, nullable ) GitHubRelease * githubRelease;
+
+/*!
+ * @property    installingUpdate
+ * @abstract    Whether an update is currently beeing installed.
+ */
+@property( atomic, readonly ) BOOL installingUpdate;
+
+/*!
+ * @method      initWithAsset:release:
+ * @abstract    Initializes an instance with an asset and a release.
+ * @discussion  Although not marked as so, this method acts as the class'
+ *              designated initializer.
+ * @param       asset   The proposed asset
+ * @param       release The proposed release
+ * @see         GitHubReleaseAsset
+ * @see         GitHubRelease
+ */
 - ( instancetype )initWithAsset: ( GitHubReleaseAsset * )asset release: ( GitHubRelease * )release;
 
 @end
