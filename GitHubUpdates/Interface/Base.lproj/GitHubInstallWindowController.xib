@@ -83,6 +83,9 @@
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <outlet property="nextKeyView" destination="bX8-Pi-3Sh" id="5cJ-CT-wgF"/>
+                                </connections>
                             </textField>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecd-7z-J9V">
                                 <rect key="frame" x="20" y="61" width="484" height="197"/>
@@ -117,6 +120,9 @@
                                     <rect key="frame" x="467" y="1" width="16" height="195"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
+                                <connections>
+                                    <outlet property="nextKeyView" destination="vf3-XW-XGk" id="VtB-Bl-BLY"/>
+                                </connections>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-XW-XGk">
                                 <rect key="frame" x="14" y="13" width="82" height="32"/>
@@ -129,6 +135,7 @@ Gw
                                 </buttonCell>
                                 <connections>
                                     <action selector="cancel:" target="-2" id="TSz-Fy-lvG"/>
+                                    <outlet property="nextKeyView" destination="667-fT-iYM" id="WGQ-It-DSK"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="667-fT-iYM">
@@ -144,6 +151,7 @@ Gw
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
+                                    <outlet property="nextKeyView" destination="oso-pp-txM" id="cze-Zb-V0W"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oso-pp-txM">
@@ -157,6 +165,7 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="install:" target="-2" id="VDc-Bi-1z6"/>
+                                    <outlet property="nextKeyView" destination="vf3-XW-XGk" id="tMO-Bj-EaD"/>
                                 </connections>
                             </button>
                         </subviews>

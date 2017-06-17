@@ -34,6 +34,7 @@
 #import "NSError+GitHubUpdates.h"
 #import "NSString+GitHubUpdates.h"
 #import "NSBundle+GitHubUpdates.h"
+#import "NSAttributedString+GitHubUpdates.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -142,7 +143,7 @@ NS_ASSUME_NONNULL_END
         self.message = [ NSString stringWithFormat: NSLocalizedString( @"Version %@ is available. You have version %@. Would you like to install the new version now?", @"" ), self.githubRelease.tagName, version ];
     }
     
-    self.releaseNotes = [ [ NSAttributedString alloc ] initWithString: self.githubRelease.body attributes: nil ];
+    self.releaseNotes = [ NSAttributedString attributedStringFromMarkdownString: self.githubRelease.body ];
 }
 
 - ( IBAction )install: ( nullable id )sender
