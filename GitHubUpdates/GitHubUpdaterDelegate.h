@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 - ( BOOL )updaterShouldCheckForUpdatesInBackground: ( GitHubUpdater * )updater;
 - ( Class )classForUpdaterProgressWindowController: ( GitHubUpdater * )updater;
 - ( Class )classForUpdaterInstallWindowController: ( GitHubUpdater * )updater;
+- ( NSURL * )updater: ( GitHubUpdater * )updater urlForUpdatesWithUser: ( NSString * )user repository: ( NSString * )repository proposedURL: ( NSURL * )proposedURL;
 - ( void )updater: ( GitHubUpdater * )updater willShowProgressWindowController: ( GitHubProgressWindowController * )controller;
 - ( void )updater: ( GitHubUpdater * )updater willShowInstallWindowController: ( GitHubInstallWindowController * )controller;
 - ( void )updater: ( GitHubUpdater * )updater didShowProgressWindowController: ( GitHubProgressWindowController * )controller;

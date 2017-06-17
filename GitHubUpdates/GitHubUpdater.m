@@ -200,6 +200,17 @@ NS_ASSUME_NONNULL_END
             self.checkingForUpdates = YES;
             url                     = [ NSURL URLWithString: [ NSString stringWithFormat: @"https://api.github.com/repos/%@/%@/releases", self.user, self.repository ] ];
             
+            {
+                id< GitHubUpdaterDelegate > delegate;
+                
+                delegate = self.delegate;
+                
+                if( [ delegate respondsToSelector: @selector( updater:urlForUpdatesWithUser:repository:proposedURL: ) ] )
+                {
+                    url = [ delegate updater: self urlForUpdatesWithUser: self.user repository: self.repository proposedURL: url ];
+                }
+            }
+            
             if( options & GitHubUpdaterDisplayOptionsDisplayUI )
             {
                 {
