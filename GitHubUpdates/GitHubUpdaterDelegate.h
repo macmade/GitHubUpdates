@@ -27,7 +27,7 @@
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @class GitHubUpdater;
 @class GitHubProgressWindowController;
@@ -46,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 - ( void )updater: ( GitHubUpdater * )updater willShowInstallWindowController: ( GitHubInstallWindowController * )controller;
 - ( void )updater: ( GitHubUpdater * )updater didShowProgressWindowController: ( GitHubProgressWindowController * )controller;
 - ( void )updater: ( GitHubUpdater * )updater didShowInstallWindowController: ( GitHubInstallWindowController * )controller;
+- ( void )updater: ( GitHubUpdater * )updater willCloseProgressWindowController: ( GitHubProgressWindowController * )controller;
+- ( void )updater: ( GitHubUpdater * )updater willCloseInstallWindowController: ( GitHubInstallWindowController * )controller;
+- ( void )updater: ( GitHubUpdater * )updater willDisplayAlert: ( NSAlert * )alert withError: ( NSError * )error;
+- ( void )updater: ( GitHubUpdater * )updater willDisplayUpToDateAlert: ( NSAlert * )alert;
 
 @end
 

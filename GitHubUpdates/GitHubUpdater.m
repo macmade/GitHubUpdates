@@ -103,14 +103,30 @@ NS_ASSUME_NONNULL_END
 
 - ( void )closeProgressWindow
 {
-    dispatch_async
-    (
-        dispatch_get_main_queue(),
-        ^( void )
+    void ( ^ close )( void );
+    
+    close = ^( void )
+    {
+        id< GitHubUpdaterDelegate > delegate;
+        
+        delegate = self.delegate;
+        
+        if( [ delegate respondsToSelector: @selector( updater:willCloseProgressWindowController: ) ] )
         {
-            [ self.progressWindowController.window close ];
+            [ delegate updater: self willCloseProgressWindowController: self.progressWindowController ];
         }
-    );
+        
+        [ self.progressWindowController.window close ];
+    };
+    
+    if( [ NSThread isMainThread ] )
+    {
+        close();
+    }
+    else
+    {
+        dispatch_async( dispatch_get_main_queue(), close );
+    }
 }
 
 - ( void )displayErrorWithMessage: ( NSString * )message
@@ -134,9 +150,16 @@ NS_ASSUME_NONNULL_END
         dispatch_get_main_queue(),
         ^( void )
         {
-            NSAlert * alert;
+            NSAlert                   * alert;
+            id< GitHubUpdaterDelegate > delegate;
             
-            alert = [ NSAlert alertWithError: error ];
+            alert    = [ NSAlert alertWithError: error ];
+            delegate = self.delegate;
+            
+            if( [ delegate respondsToSelector: @selector( updater:willDisplayAlert:withError: ) ] )
+            {
+                [ delegate updater: self willDisplayAlert: alert withError: error ];
+            }
             
             [ alert runModal ];
         }
@@ -333,10 +356,11 @@ NS_ASSUME_NONNULL_END
                 dispatch_get_main_queue(),
                 ^( void )
                 {
-                    NSAlert  * alert;
-                    NSString * name;
-                    NSString * version;
-                    NSString * message;
+                    NSAlert                   * alert;
+                    NSString                  * name;
+                    NSString                  * version;
+                    NSString                  * message;
+                    id< GitHubUpdaterDelegate > delegate;
                     
                     alert   = [ NSAlert new ];
                     name    = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleName" ];
@@ -358,7 +382,14 @@ NS_ASSUME_NONNULL_END
                     
                     if( options & GitHubUpdaterDisplayOptionsDisplayUI )
                     {
-                        [ self.progressWindowController.window close ];
+                        [ self closeProgressWindow ];
+                    }
+                    
+                    delegate = self.delegate;
+                    
+                    if( [ delegate respondsToSelector: @selector( updater:willDisplayUpToDateAlert: ) ] )
+                    {
+                        [ delegate updater: self willDisplayUpToDateAlert: alert ];
                     }
                     
                     [ alert runModal ];
@@ -484,6 +515,8 @@ NS_ASSUME_NONNULL_END
 
 - ( void )installWindowWillClose: ( NSNotification * )notification;
 {
+    id< GitHubUpdaterDelegate > delegate;
+    
     if( self.installWindowController == nil )
     {
         return;
@@ -496,6 +529,13 @@ NS_ASSUME_NONNULL_END
     
     [ self unbind: NSStringFromSelector( @selector( installingUpdate ) ) ];
     [ [ NSNotificationCenter defaultCenter ] removeObserver: self name: NSWindowWillCloseNotification object: self.installWindowController ];
+    
+    delegate = self.delegate;
+    
+    if( [ delegate respondsToSelector: @selector( updater:willCloseInstallWindowController: ) ] )
+    {
+        [ delegate updater: self willCloseInstallWindowController: self.installWindowController ];
+    }
     
     self.installWindowController = nil;
 }
