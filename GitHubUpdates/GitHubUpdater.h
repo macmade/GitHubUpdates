@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @property    delegate
- * @abstract    The delaget object, if you need behaviour customization.
+ * @abstract    The delegate object, if you need behaviour customization.
  * @see         GitHubUpdaterDelegate
  */
 @property( atomic, readwrite, weak ) id< GitHubUpdaterDelegate > delegate;

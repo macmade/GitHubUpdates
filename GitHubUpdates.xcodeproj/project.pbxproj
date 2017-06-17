@@ -73,6 +73,8 @@
 
 /* Begin PBXFileReference section */
 		051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubUpdaterDelegate.h; sourceTree = "<group>"; };
+		051B60D31EF5882E00EE49CF /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		051B60D61EF5882E00EE49CF /* Home.inc.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = Home.inc.php; sourceTree = "<group>"; };
 		052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubInstallWindowController.h; sourceTree = "<group>"; };
 		052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubInstallWindowController.m; sourceTree = "<group>"; };
 		052C70911EF370E1000B8D06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubInstallWindowController.xib; sourceTree = "<group>"; };
@@ -126,6 +128,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051B60D21EF5882E00EE49CF /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				051B60D31EF5882E00EE49CF /* Makefile */,
+				051B60D51EF5882E00EE49CF /* Pages */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
+		051B60D51EF5882E00EE49CF /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				051B60D61EF5882E00EE49CF /* Home.inc.php */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
 		0555EBA11EF3DDA10016167F /* Relauncher */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +184,7 @@
 			children = (
 				0555EBAB1EF3E33E0016167F /* README.md */,
 				05F82B271EF32EA700EC8A93 /* GitHubUpdates */,
+				051B60D21EF5882E00EE49CF /* Documentation */,
 				0555EBA11EF3DDA10016167F /* Relauncher */,
 				05F82B261EF32EA700EC8A93 /* Products */,
 				05ED06521EF33BCD00C61AFA /* Frameworks */,

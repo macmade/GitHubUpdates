@@ -1,0 +1,6 @@
+*
+!HeaderDoc-Exclude.txt
+!Makefile
+!Pages/
+!Pages/*
+!.gitignore
