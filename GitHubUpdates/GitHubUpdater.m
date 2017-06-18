@@ -30,6 +30,7 @@
 #import "GitHubUpdater.h"
 #import "GitHubRelease.h"
 #import "GitHubReleaseAsset.h"
+#import "GitHubVersion.h"
 #import "GitHubProgressWindowController.h"
 #import "GitHubInstallWindowController.h"
 #import "Pair.h"
@@ -342,9 +343,19 @@ NS_ASSUME_NONNULL_END
     NSError                                       * error;
     NSArray< GitHubRelease * >                    * releases;
     Pair< GitHubRelease *, GitHubReleaseAsset * > * update;
+    id< GitHubUpdaterDelegate >                     delegate;
     
     error    = nil;
-    releases = [ GitHubRelease releasesWithData: data error: &error ];
+    delegate = self.delegate;
+    
+    if( [ delegate respondsToSelector: @selector( updater:releasesWithData:error: ) ] )
+    {
+        releases = [ delegate updater: self releasesWithData: data error: &error ];
+    }
+    else
+    {
+        releases = [ GitHubRelease releasesWithData: data error: &error ];
+    }
     
     if( error != nil )
     {
@@ -367,11 +378,10 @@ NS_ASSUME_NONNULL_END
                 dispatch_get_main_queue(),
                 ^( void )
                 {
-                    NSAlert                   * alert;
-                    NSString                  * name;
-                    NSString                  * version;
-                    NSString                  * message;
-                    id< GitHubUpdaterDelegate > delegate;
+                    NSAlert  * alert;
+                    NSString * name;
+                    NSString * version;
+                    NSString * message;
                     
                     alert   = [ NSAlert new ];
                     name    = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleName" ];
@@ -396,8 +406,6 @@ NS_ASSUME_NONNULL_END
                         [ self closeProgressWindow ];
                     }
                     
-                    delegate = self.delegate;
-                    
                     if( [ delegate respondsToSelector: @selector( updater:willDisplayUpToDateAlert: ) ] )
                     {
                         [ delegate updater: self willDisplayUpToDateAlert: alert ];
@@ -416,17 +424,34 @@ NS_ASSUME_NONNULL_END
 
 - ( Pair< GitHubRelease *, GitHubReleaseAsset * > * )findBestAssetFromReleases: ( NSArray< GitHubRelease * > * )releases
 {
-    NSString                                      * currentVersion;
     GitHubRelease                                 * release;
     GitHubReleaseAsset                            * asset;
+    GitHubVersion                                 * version;
+    GitHubVersion                                 * currentVersion;
     GitHubRelease                                 * bestRelease;
     GitHubReleaseAsset                            * bestAsset;
+    GitHubVersion                                 * bestVersion;
     Pair< GitHubRelease *, GitHubReleaseAsset * > * pair;
     id< GitHubUpdaterDelegate >                     delegate;
+    NSString                                      * versionString;
+    NSString                                      * bundleVersion;
     
     delegate       = self.delegate;
     asset          = nil;
-    currentVersion = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ];
+    versionString  = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ];
+    bundleVersion  = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleVersion" ];
+    
+    if( versionString == nil )
+    {
+        versionString = @"0";
+    }
+    
+    if( bundleVersion == nil )
+    {
+        bundleVersion = @"0";
+    }
+    
+    currentVersion = [ [ GitHubVersion alloc ] initWithVersionString: versionString bundleVersion: bundleVersion ];
     
     for( release in releases )
     {
@@ -435,19 +460,18 @@ NS_ASSUME_NONNULL_END
             continue;
         }
         
-        if( release.tagName.length == 0 )
+        if( [ delegate respondsToSelector: @selector( updater:versionForRelease: ) ] )
         {
-            continue;
+            version = [ delegate updater: self versionForRelease: release ];
         }
-        
-        if( [ release.tagName compare: currentVersion options: NSNumericSearch ] != NSOrderedDescending )
+        else
         {
-            continue;
-        }
-        
-        if( bestAsset != nil && ( [ release.tagName compare: bestRelease.tagName options: NSNumericSearch ] != NSOrderedDescending ) )
-        {
-            continue;
+            if( release.tagName.length == 0 )
+            {
+                continue;
+            }
+            
+            version = [ [ GitHubVersion alloc ] initWithVersionString: release.tagName bundleVersion: @"0" ];
         }
         
         if( release.draft )
@@ -474,6 +498,52 @@ NS_ASSUME_NONNULL_END
             }
         }
         
+        if( [ delegate respondsToSelector: @selector( updater:version:isNewerThanVersion: ) ] )
+        {
+            if( [ delegate updater: self version: version isNewerThanVersion: currentVersion ] == NO )
+            {
+                continue;
+            }
+            
+            if( bestVersion != nil && [ delegate updater: self version: version isNewerThanVersion: bestVersion ] == NO )
+            {
+                continue;
+            }
+        }
+        else
+        {
+            {
+                NSComparisonResult comp;
+                
+                comp = [ version.versionString compare: currentVersion.versionString options: NSNumericSearch ];
+                
+                if( comp == NSOrderedSame )
+                {
+                    comp = [ version.bundleVersion compare: currentVersion.bundleVersion options: NSNumericSearch ];
+                }
+                
+                if( comp != NSOrderedDescending )
+                {
+                    continue;
+                }
+                
+                if( bestVersion != nil )
+                {
+                    comp = [ version.versionString compare: bestVersion.versionString options: NSNumericSearch ];
+                    
+                    if( comp == NSOrderedSame )
+                    {
+                        comp = [ version.bundleVersion compare: currentVersion.bundleVersion options: NSNumericSearch ];
+                    }
+                    
+                    if( comp != NSOrderedDescending )
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+        
         for( asset in release.assets )
         {
             if( asset.size == 0 )
@@ -493,6 +563,7 @@ NS_ASSUME_NONNULL_END
             
             bestAsset   = asset;
             bestRelease = release;
+            bestVersion = version;
             
             break;
         }

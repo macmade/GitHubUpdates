@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @header      Pair.h
+ * @header      GitHubVersion.h
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
@@ -31,33 +31,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- * @class       Pair
- * @abstract    Represents an object pair.
- */
-@interface Pair< FirstType, SecondType >: NSObject
+@interface GitHubVersion: NSObject
 
 /*!
- * @property    first
- * @abstract    The first object in the pair.
+ * @property    versionString
+ * @abstract    The version string.
  */
-@property( atomic, readwrite, strong, nullable ) FirstType first;
+@property( atomic, readwrite, strong ) NSString * versionString;
 
 /*!
- * @property    second
- * @abstract    The second object in the pair.
+ * @property    versionString
+ * @abstract    The bundle version string.
  */
-@property( atomic, readwrite, strong, nullable ) SecondType second;
+@property( atomic, readwrite, strong ) NSString * bundleVersion;
 
 /*!
- * @method      initWithFirstValue:secondValue:
- * @abstract    Initialized an instance of this class.
- * @discussion  This is the class's designated initializer.
+ * @method      initWithVersionString:bundleVersion:
+ * @abstract    Designated initializer.
+ * @param       versionString   The version string
+ * @param       bundleVersion   The bundle version string
  * @result      The initialized instance
- * @param       v1  The first object
- * @param       v2  The second object
  */
-- ( instancetype )initWithFirstValue: ( nullable FirstType )v1 secondValue: ( nullable SecondType )v2 NS_DESIGNATED_INITIALIZER;
+- ( instancetype )initWithVersionString: ( NSString * )versionString bundleVersion: ( NSString * )bundleVersion NS_DESIGNATED_INITIALIZER;
 
 @end
 

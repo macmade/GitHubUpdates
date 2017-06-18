@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		051B60AC1EF559E100EE49CF /* GitHubUpdaterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		051B60D91EF630EB00EE49CF /* GitHubVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 051B60D71EF630EB00EE49CF /* GitHubVersion.h */; };
+		051B60DA1EF630EB00EE49CF /* GitHubVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 051B60D81EF630EB00EE49CF /* GitHubVersion.m */; };
 		052C708E1EF370BB000B8D06 /* GitHubInstallWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		052C708F1EF370BB000B8D06 /* GitHubInstallWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */; };
 		052C70921EF370E1000B8D06 /* GitHubInstallWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052C70901EF370E1000B8D06 /* GitHubInstallWindowController.xib */; };
@@ -75,6 +77,8 @@
 		051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubUpdaterDelegate.h; sourceTree = "<group>"; };
 		051B60D31EF5882E00EE49CF /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		051B60D61EF5882E00EE49CF /* Home.inc.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = Home.inc.php; sourceTree = "<group>"; };
+		051B60D71EF630EB00EE49CF /* GitHubVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubVersion.h; sourceTree = "<group>"; };
+		051B60D81EF630EB00EE49CF /* GitHubVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubVersion.m; sourceTree = "<group>"; };
 		052C708C1EF370BB000B8D06 /* GitHubInstallWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubInstallWindowController.h; sourceTree = "<group>"; };
 		052C708D1EF370BB000B8D06 /* GitHubInstallWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitHubInstallWindowController.m; sourceTree = "<group>"; };
 		052C70911EF370E1000B8D06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GitHubInstallWindowController.xib; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 				05ED064A1EF337D200C61AFA /* GitHubUpdater.m */,
 				051B60AB1EF5597D00EE49CF /* GitHubUpdaterDelegate.h */,
 				05ED06481EF337D200C61AFA /* GitHubUpdates.h */,
+				051B60D71EF630EB00EE49CF /* GitHubVersion.h */,
+				051B60D81EF630EB00EE49CF /* GitHubVersion.m */,
 				05751AA01EF40CC400680B34 /* NSAttributedString+GitHubUpdates.h */,
 				05751AA11EF40CC400680B34 /* NSAttributedString+GitHubUpdates.m */,
 				0555EB981EF3D3810016167F /* NSBundle+GitHubUpdates.h */,
@@ -242,6 +248,7 @@
 			files = (
 				05F1E5F71EF381C00045C4CD /* Pair.h in Headers */,
 				05751AA81EF526DE00680B34 /* NSMutableAttributedString+GitHubUpdates.h in Headers */,
+				051B60D91EF630EB00EE49CF /* GitHubVersion.h in Headers */,
 				05ED06501EF33BB000C61AFA /* GitHubProgressWindowController.h in Headers */,
 				0595CADD1EF35CAB00F2561E /* GitHubReleaseAsset.h in Headers */,
 				05ED064D1EF338B800C61AFA /* GitHubUpdates.h in Headers */,
@@ -361,6 +368,7 @@
 				0595CADA1EF3586A00F2561E /* GitHubRelease.m in Sources */,
 				0555EB9B1EF3D3810016167F /* NSBundle+GitHubUpdates.m in Sources */,
 				05F1E5F81EF381C00045C4CD /* Pair.m in Sources */,
+				051B60DA1EF630EB00EE49CF /* GitHubVersion.m in Sources */,
 				05751AA71EF526DB00680B34 /* NSMutableAttributedString+GitHubUpdates.m in Sources */,
 				05ED064B1EF338B200C61AFA /* GitHubUpdater.m in Sources */,
 				05B6BAD21EF3C51400842E6D /* NSError+GitHubUpdates.m in Sources */,

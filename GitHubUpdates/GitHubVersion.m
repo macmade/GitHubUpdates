@@ -23,42 +23,36 @@
  ******************************************************************************/
 
 /*!
- * @header      Pair.h
+ * @file        GitHubVersion.m
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import <Foundation/Foundation.h>
+#import "GitHubVersion.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- * @class       Pair
- * @abstract    Represents an object pair.
- */
-@interface Pair< FirstType, SecondType >: NSObject
-
-/*!
- * @property    first
- * @abstract    The first object in the pair.
- */
-@property( atomic, readwrite, strong, nullable ) FirstType first;
-
-/*!
- * @property    second
- * @abstract    The second object in the pair.
- */
-@property( atomic, readwrite, strong, nullable ) SecondType second;
-
-/*!
- * @method      initWithFirstValue:secondValue:
- * @abstract    Initialized an instance of this class.
- * @discussion  This is the class's designated initializer.
- * @result      The initialized instance
- * @param       v1  The first object
- * @param       v2  The second object
- */
-- ( instancetype )initWithFirstValue: ( nullable FirstType )v1 secondValue: ( nullable SecondType )v2 NS_DESIGNATED_INITIALIZER;
+@interface GitHubVersion()
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+@implementation GitHubVersion
+
+- ( instancetype )init
+{
+    return [ self initWithVersionString: @"" bundleVersion: @"" ];
+}
+
+- ( instancetype )initWithVersionString: ( NSString * )versionString bundleVersion: ( NSString * )bundleVersion
+{
+    if( ( self = [ super init ] ) )
+    {
+        self.versionString = versionString;
+        self.bundleVersion = bundleVersion;
+    }
+    
+    return self;
+}
+
+@end

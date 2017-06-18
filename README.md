@@ -71,7 +71,7 @@ This will check for updates every hour.
 **GitHubUpdates** will check your GitHub tags to see if an update is available.
 
 Your tags should correspond to the application's version number, as in `CFBundleShortVersionString`.  
-There's currently no support for `CFBundleVersion`.
+There's no built-in support for `CFBundleVersion`, but that behaviour can be customized with `GitHubUpdaterDelegate` if needed.
 
 Tags can be created on GitHub the following way:
 

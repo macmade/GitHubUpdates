@@ -30,6 +30,8 @@
 #import <Cocoa/Cocoa.h>
 
 @class GitHubUpdater;
+@class GitHubRelease;
+@class GitHubVersion;
 @class GitHubProgressWindowController;
 @class GitHubInstallWindowController;
 
@@ -108,6 +110,44 @@ NS_ASSUME_NONNULL_BEGIN
  * @param       proposedURL The proposed, default URL
  */
 - ( NSURL * )updater: ( GitHubUpdater * )updater urlForUpdatesWithUser: ( NSString * )user repository: ( NSString * )repository proposedURL: ( NSURL * )proposedURL;
+
+/*!
+ * @method      updater:releasesWithData:error:
+ * @abstract    Gets releases from a data object
+ * @discussion  You may implement this method if you need to customize the
+ *              parsing of updates data, with a different behaviour than
+ *              using JSON data from GitHub releases.
+ * @param       updater The updater object
+ * @param       data    The data object fetched from the update URL
+ * @param       error   An optional pointer to an error object
+ * @result      An array of release objects, if any
+ */
+- ( nullable NSArray< GitHubRelease * > * )updater: ( GitHubUpdater * )updater releasesWithData: ( NSData * )data error: ( NSError * __autoreleasing * )error;
+
+/*!
+ * @method      updater:versionForRelease:
+ * @abstract    Gets a version object for a release.
+ * @discussion  You may implement this method if you need to customize the
+ *              way version numbers are created from releases.
+ *              If not implemented, the tag name will be used as version
+ *              number.
+ * @param       updater The updater object
+ * @param       release The release object
+ * @result      A version object for the release
+ */
+- ( GitHubVersion * )updater: ( GitHubUpdater * )updater versionForRelease: ( GitHubRelease * )release;
+
+/*!
+ * @method      updater:version:isNewerThanVersion:
+ * @abstract    Determines if a version is newer than another version
+ * @discussion  You may implement this method if you need to customize the
+ *              way versions are compared.
+ * @param       updater The updater object
+ * @param       v1      The first version
+ * @param       v2      The second version
+ * @result      YES if the first version is newer, otherwise NO
+ */
+- ( BOOL )updater: ( GitHubUpdater * )updater version: ( GitHubVersion * )v1 isNewerThanVersion: ( GitHubVersion * )v2;
 
 /*!
  * @method      updater:willShowProgressWindowController:
