@@ -189,7 +189,7 @@
 		05F82B1C1EF32EA700EC8A93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					05F82B341EF32ED000EC8A93 = {
