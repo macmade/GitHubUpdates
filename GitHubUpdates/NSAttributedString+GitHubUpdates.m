@@ -76,12 +76,20 @@
 
 + ( NSDictionary * )markdownAttributesForRegularText
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 10 weight: NSFontWeightThin ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 10 weight: NSFontWeightThin ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForBoldText
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 10 weight: NSFontWeightBold ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 10 weight: NSFontWeightBold ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForItalicText
@@ -91,50 +99,76 @@
     font = [ NSFont systemFontOfSize: 10 weight: NSFontWeightThin ];
     font = [ [ NSFontManager sharedFontManager ] convertFont: font toHaveTrait: NSItalicFontMask ];
     
-    return @{ NSFontAttributeName : font };
+    return
+    @{
+        NSFontAttributeName            : font,
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForCodeText
 {
     NSFont  * font;
-    NSColor * background;
     NSColor * foreground;
     
     font       = [ NSFont fontWithName: @"Menlo" size: 10 ];
-    background = [ NSColor colorWithDeviceRed: 249.0 / 255.0 green: 242.0 / 255.0 blue: 244.0 / 255.0 alpha: 1.0 ];
     foreground = [ NSColor colorWithDeviceRed: 199.0 / 255.0 green:  37.0 / 255.0 blue:  78.0 / 255.0 alpha: 1.0 ];
     
-    return @{ NSFontAttributeName : font, NSBackgroundColorAttributeName : background, NSForegroundColorAttributeName : foreground };
+    return @{ NSFontAttributeName : font, NSForegroundColorAttributeName : foreground };
 }
 
 + ( NSDictionary * )markdownAttributesForHeading1
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 20 weight: NSFontWeightRegular ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 20 weight: NSFontWeightRegular ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForHeading2
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 18 weight: NSFontWeightRegular ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 18 weight: NSFontWeightRegular ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForHeading3
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 16 weight: NSFontWeightRegular ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 16 weight: NSFontWeightRegular ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForHeading4
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 14 weight: NSFontWeightRegular ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 14 weight: NSFontWeightRegular ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForHeading5
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 12 weight: NSFontWeightRegular ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 12 weight: NSFontWeightRegular ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 + ( NSDictionary * )markdownAttributesForHeading6
 {
-    return @{ NSFontAttributeName : [ NSFont systemFontOfSize: 10 weight: NSFontWeightRegular ] };
+    return
+    @{
+        NSFontAttributeName            : [ NSFont systemFontOfSize: 10 weight: NSFontWeightRegular ],
+        NSForegroundColorAttributeName : [ NSColor textColor ]
+    };
 }
 
 @end
