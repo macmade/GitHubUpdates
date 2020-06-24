@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_END
     return self;
 }
 
-- ( void )checkForUpdatesInBackground;
+- ( void )checkForUpdatesInBackground
 {
     id< GitHubUpdaterDelegate > delegate;
     
@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_END
     [ self displayErrorWithTitle: @"Error" message: message ];
 }
 
-- ( void )displayErrorWithTitle: ( NSString * )title message: ( NSString * )message;
+- ( void )displayErrorWithTitle: ( NSString * )title message: ( NSString * )message
 {
     NSError * error;
     
@@ -621,7 +621,7 @@ NS_ASSUME_NONNULL_END
     );
 }
 
-- ( void )installWindowWillClose: ( NSNotification * )notification;
+- ( void )installWindowWillClose: ( NSNotification * )notification
 {
     id< GitHubUpdaterDelegate > delegate;
     

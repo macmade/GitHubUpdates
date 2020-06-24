@@ -204,7 +204,7 @@ NS_ASSUME_NONNULL_END
     [ self displayErrorWithTitle: NSLocalizedString( @"Error", @"" ) message: message ];
 }
 
-- ( void )displayErrorWithTitle: ( NSString * )title message: ( NSString * )message;
+- ( void )displayErrorWithTitle: ( NSString * )title message: ( NSString * )message
 {
     NSError * error;
     
@@ -508,7 +508,7 @@ NS_ASSUME_NONNULL_END
     return [ NSTemporaryDirectory() stringByAppendingPathComponent: [ NSProcessInfo processInfo ].globallyUniqueString ];
 }
 
-- ( nullable NSURL * )createTemporaryDirectory;
+- ( nullable NSURL * )createTemporaryDirectory
 {
     NSURL   * url;
     NSError * error;
