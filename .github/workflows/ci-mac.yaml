@@ -1,0 +1,26 @@
+name: ci-mac
+on:   [push]
+jobs:
+    ci:
+        runs-on: macos-latest
+        strategy:
+            matrix:
+                run-config:
+                    - { scheme: 'GitHubUpdates', configuration: 'Debug',   project: 'GitHubUpdates.xcodeproj', build: 1, analyze: 1, test: 0, info: 1, destination: 'platform=macOS' }
+                    - { scheme: 'GitHubUpdates', configuration: 'Release', project: 'GitHubUpdates.xcodeproj', build: 1, analyze: 1, test: 0, info: 1, destination: 'platform=macOS' }
+        steps:
+            
+            - uses: actions/checkout@v1
+              with:
+                submodules: 'recursive'
+                
+            - uses: macmade/github-actions/xcodebuild@v1.0.0
+            
+            - uses: act10ns/slack@v1
+              if:   ${{ always() }}
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+              with:
+                status:     ${{ job.status }}
+                steps:      ${{ toJson(steps) }}
+                channel:    '#ci'
