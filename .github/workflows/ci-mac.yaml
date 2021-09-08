@@ -14,7 +14,7 @@ jobs:
               with:
                 submodules: 'recursive'
                 
-            - uses: macmade/github-actions/xcodebuild@v1.0.0
+            - uses: macmade/action-xcodebuild@v1.0.0
             
             - uses: act10ns/slack@v1
               if:   ${{ always() }}
