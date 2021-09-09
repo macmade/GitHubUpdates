@@ -16,11 +16,11 @@ jobs:
                 
             - uses: macmade/action-xcodebuild@v1.0.0
             
-            - uses: act10ns/slack@v1
+            - uses: macmade/action-slack@v1.0.0
               if:   ${{ always() }}
               env:
-                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
               with:
-                status:     ${{ job.status }}
-                steps:      ${{ toJson(steps) }}
                 channel:    '#ci'
+                status:     ${{ job.status }}
+                title:      ${{ matrix.run-config[ 'scheme' ] }} - ${{ matrix.run-config[ 'configuration' ] }}
