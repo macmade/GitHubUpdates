@@ -6,7 +6,7 @@ GitHubUpdates
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg?logo=git)
 ![License](https://img.shields.io/badge/license-mit-brightgreen.svg?logo=open-source-initiative)  
 [![Contact](https://img.shields.io/badge/follow-@macmade-blue.svg?logo=twitter&style=social)](https://twitter.com/macmade)
-[![Donate-Paypal](https://img.shields.io/badge/donate-paypal-pink.svg?logo=github-sponsors&style=social)](https://paypal.me/xslabs)
+[![Sponsor](https://img.shields.io/badge/sponsor-macmade-pink.svg?logo=github-sponsors&style=social)](https://github.com/sponsors/macmade)
 
 About
 -----
