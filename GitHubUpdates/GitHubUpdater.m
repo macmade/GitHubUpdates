@@ -161,7 +161,8 @@ NS_ASSUME_NONNULL_END
             {
                 [ delegate updater: self willDisplayAlert: alert withError: error ];
             }
-            
+
+            [ NSApp activateIgnoringOtherApps: YES ];
             [ alert runModal ];
         }
     );
@@ -183,6 +184,7 @@ NS_ASSUME_NONNULL_END
             
             if( self.installWindowController != nil )
             {
+                [ NSApp activateIgnoringOtherApps: YES ];
                 [ self.installWindowController.window makeKeyAndOrderFront: nil ];
                 
                 return;
@@ -254,7 +256,8 @@ NS_ASSUME_NONNULL_END
                         {
                             [ delegate updater: self willShowProgressWindowController: self.progressWindowController ];
                         }
-                        
+
+                        [ NSApp activateIgnoringOtherApps: YES ];
                         [ self.progressWindowController showWindow: nil ];
                         [ self.progressWindowController.window center ];
                         
@@ -411,6 +414,7 @@ NS_ASSUME_NONNULL_END
                         [ delegate updater: self willDisplayUpToDateAlert: alert ];
                     }
                     
+                    [ NSApp activateIgnoringOtherApps: YES ];
                     [ alert runModal ];
                 }
             );

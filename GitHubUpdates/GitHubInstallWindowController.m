@@ -223,7 +223,8 @@ NS_ASSUME_NONNULL_END
             NSAlert * alert;
             
             alert = [ NSAlert alertWithError: error ];
-            
+
+            [ NSApp activateIgnoringOtherApps: YES ];
             [ alert runModal ];
         }
     );
@@ -474,6 +475,7 @@ NS_ASSUME_NONNULL_END
                                 alert.informativeText = NSLocalizedString( @"The application will now be restarted.", @"" );
                                 
                                 [ alert addButtonWithTitle: NSLocalizedString( @"Relaunch", @"" ) ];
+                                [ NSApp activateIgnoringOtherApps: YES ];
                                 [ alert runModal ];
                                 
                                 path            = [ NSBundle bundleForClass: [ self class ] ].bundlePath;
