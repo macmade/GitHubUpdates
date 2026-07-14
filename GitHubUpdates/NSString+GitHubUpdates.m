@@ -43,17 +43,17 @@
     
     if( bytes < 1000UL * 1000UL )
     {
-        size = bytes / 1000.0;
+        size = ( double )bytes / 1000.0;
         unit = NSLocalizedString( @"KB", @"" );
     }
     else if( bytes < 1000UL * 1000UL * 1000UL )
     {
-        size = bytes / ( 1000.0 * 1000.0 );
+        size = ( double )bytes / ( 1000.0 * 1000.0 );
         unit = NSLocalizedString( @"MB", @"" );
     }
     else
     {
-        size = bytes / ( 1000.0 * 1000.0 * 1000.0 );
+        size = ( double )bytes / ( 1000.0 * 1000.0 * 1000.0 );
         unit = NSLocalizedString( @"GB", @"" );
     }
     

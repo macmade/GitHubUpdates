@@ -167,7 +167,7 @@ NS_ASSUME_NONNULL_END
     self.progressWindowController               = [ GitHubProgressWindowController new ];
     self.progressWindowController.progress      = 0.0;
     self.progressWindowController.progressMin   = 0.0;
-    self.progressWindowController.progressMax   = self.asset.size;
+    self.progressWindowController.progressMax   = ( double )( self.asset.size );
     self.progressWindowController.indeterminate = YES;
     
     if( app.length == 0 )
@@ -851,8 +851,8 @@ NS_ASSUME_NONNULL_END
     }
     
     self.progressWindowController.indeterminate = NO;
-    self.progressWindowController.progress      = totalBytesWritten;
-    self.progressWindowController.progressMax   = totalBytesExpectedToWrite;
+    self.progressWindowController.progress      = ( double )totalBytesWritten;
+    self.progressWindowController.progressMax   = ( double )totalBytesExpectedToWrite;
     self.progressWindowController.message       = message;
 }
 
